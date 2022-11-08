@@ -1,0 +1,15 @@
+.profile__edit {
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #fff;
+  align-self: center;
+  background-image: url(../../../images/profile__edit.png);
+  background-repeat: no-repeat;
+  background-position: 40%, top;
+  transition: 0.5s;
+}
+
+.profile__edit:hover {
+  opacity: 0.6;
+}
