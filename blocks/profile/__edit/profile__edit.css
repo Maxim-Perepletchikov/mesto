@@ -7,7 +7,8 @@
   background-image: url(../../../images/profile__edit.png);
   background-repeat: no-repeat;
   background-position: 40%, top;
-  transition: 0.5s;
+  cursor: pointer;
+  transition: opacity 0.5s;
 }
 
 .profile__edit:hover {
