@@ -4,6 +4,7 @@
   height: 24px;
   border: 1px solid #fff;
   align-self: center;
+  background-color: rgba(255, 255, 255, 0);
   background-image: url(../../../images/profile__edit.png);
   background-repeat: no-repeat;
   background-position: 40%, top;

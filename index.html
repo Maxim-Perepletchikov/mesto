@@ -21,11 +21,12 @@
           <div class="profile__avatar"></div>
           <div class="profile__profile-info">
             <h1 class="profile__title-name">Жак-Ив Кусто</h1>
-            <div class="profile__edit"></div>
+            <button class="profile__edit"></button>
             <p class="profile__profession">Исследователь океана</p>
           </div>
           <div class="profile__add-button"></div>
         </section>
+
         <section class="gallery">
           <div class="card">
             <img
@@ -35,11 +36,7 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Карачаевск</h2>
-              <img
-                class="card__like"
-                src="./images/card__like.svg"
-                alt="лайк"
-              />
+              <button class="card__like"></button>
             </div>
           </div>
           <div class="card">
@@ -50,11 +47,7 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Гора Эльбрус</h2>
-              <img
-                class="card__like"
-                src="./images/card__like.svg"
-                alt="лайк"
-              />
+              <button class="card__like"></button>
             </div>
           </div>
           <div class="card">
@@ -65,11 +58,7 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Домбай</h2>
-              <img
-                class="card__like"
-                src="./images/card__like.svg"
-                alt="лайк"
-              />
+              <button class="card__like"></button>
             </div>
           </div>
           <div class="card">
@@ -80,11 +69,7 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Гора Эльбрус</h2>
-              <img
-                class="card__like"
-                src="./images/card__like.svg"
-                alt="лайк"
-              />
+              <button class="card__like"></button>
             </div>
           </div>
           <div class="card">
@@ -95,11 +80,7 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Домбай</h2>
-              <img
-                class="card__like"
-                src="./images/card__like.svg"
-                alt="лайк"
-              />
+              <button class="card__like"></button>
             </div>
           </div>
           <div class="card">
@@ -110,11 +91,7 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Карачаево-Черкесская Республика</h2>
-              <img
-                class="card__like"
-                src="./images/card__like.svg"
-                alt="лайк"
-              />
+              <button class="card__like"></button>
             </div>
           </div>
         </section>
@@ -125,13 +102,13 @@
 
       <section class="popup">
         <form action="#" class="form">
-          <button class="form__close-button"></button>
+          <button type="button" class="form__close-button"></button>
           <h2 class="form__title">Редактировать профиль</h2>
-          <input class="form__input" type="text" value="Имя" />
+          <input class="form__input" type="text" value="Жак-Ив Кусто" />
           <div class="form__line"></div>
-          <input class="form__input" type="text" value="Профессия" />
+          <input class="form__input" type="text" value="Исследователь океана" />
           <div class="form__line"></div>
-          <button class="form__save-button">Сохранить</button>
+          <button class="form__save-button" type="submit">Сохранить</button>
         </form>
       </section>
     </div>
