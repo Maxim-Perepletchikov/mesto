@@ -16,19 +16,33 @@
           alt="логотип"
         />
       </header>
+
       <main class="content">
         <section class="profile">
-          <div class="profile__avatar"></div>
+          <!-- <div class="profile__avatar"></div> -->
+          <img
+            class="profile__avatar"
+            src="./images/profile__avatar.png"
+            alt="Аватар"
+          />
           <div class="profile__profile-info">
             <h1 class="profile__title-name">Жак-Ив Кусто</h1>
-            <button class="profile__edit"></button>
+            <button
+              class="profile__edit"
+              type="button"
+              aria-label="Edit"
+            ></button>
             <p class="profile__profession">Исследователь океана</p>
           </div>
-          <div class="profile__add-button"></div>
+          <button
+            class="profile__add-button"
+            type="button"
+            aria-label="Add-button"
+          ></button>
         </section>
 
         <section class="gallery">
-          <div class="card">
+          <article class="card">
             <img
               class="card__image"
               src="./images/karachayevsk.jpg"
@@ -36,10 +50,14 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Карачаевск</h2>
-              <button class="card__like"></button>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="Like"
+              ></button>
             </div>
-          </div>
-          <div class="card">
+          </article>
+          <article class="card">
             <img
               class="card__image"
               src="./images/mount-elbrus.jpg"
@@ -47,10 +65,14 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Гора Эльбрус</h2>
-              <button class="card__like"></button>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="Like"
+              ></button>
             </div>
-          </div>
-          <div class="card">
+          </article>
+          <article class="card">
             <img
               class="card__image"
               src="./images/dombay.jpg"
@@ -58,10 +80,14 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Домбай</h2>
-              <button class="card__like"></button>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="Like"
+              ></button>
             </div>
-          </div>
-          <div class="card">
+          </article>
+          <article class="card">
             <img
               class="card__image"
               src="./images/mount-elbrus.jpg"
@@ -69,10 +95,14 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Гора Эльбрус</h2>
-              <button class="card__like"></button>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="Like"
+              ></button>
             </div>
-          </div>
-          <div class="card">
+          </article>
+          <article class="card">
             <img
               class="card__image"
               src="./images/dombay.jpg"
@@ -80,10 +110,14 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Домбай</h2>
-              <button class="card__like"></button>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="Like"
+              ></button>
             </div>
-          </div>
-          <div class="card">
+          </article>
+          <article class="card">
             <img
               class="card__image"
               src="./images/karachayevsk.jpg"
@@ -91,26 +125,36 @@
             />
             <div class="card__panel">
               <h2 class="card__title">Карачаево-Черкесская Республика</h2>
-              <button class="card__like"></button>
+              <button
+                class="card__like"
+                type="button"
+                aria-label="Like"
+              ></button>
             </div>
-          </div>
+          </article>
         </section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2022 Mesto Russia</p>
       </footer>
 
-      <section class="popup">
-        <form action="#" class="form">
-          <button type="button" class="form__close-button"></button>
-          <h2 class="form__title">Редактировать профиль</h2>
-          <input class="form__input" type="text" value="" />
-          <div class="form__line"></div>
-          <input class="form__input" type="text" value="" />
-          <div class="form__line"></div>
-          <button class="form__save-button" type="submit">Сохранить</button>
-        </form>
-      </section>
+      <div class="popup">
+        <div class="form__conteiner">
+          <form class="form" action="#" name="">
+            <button
+              class="form__close-button"
+              type="button"
+              aria-label="Close-button"
+            ></button>
+            <h2 class="form__title">Редактировать профиль</h2>
+            <input class="form__input" type="text" value="" />
+            <div class="form__line"></div>
+            <input class="form__input" type="text" value="" />
+            <div class="form__line"></div>
+            <button class="form__save-button" type="submit">Сохранить</button>
+          </form>
+        </div>
+      </div>
     </div>
     <script src="./scripts/index.js"></script>
   </body>

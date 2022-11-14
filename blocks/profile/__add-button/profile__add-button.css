@@ -2,9 +2,10 @@
   box-sizing: border-box;
   width: 150px;
   height: 50px;
-  background-image: url(../../../images/profile__add-button.png);
-  align-self: center;
-  justify-self: end;
+  background-image: url(../../../images/big-plus.svg);
+  border: 2px solid #fff;
+  border-radius: 2px;
+  background-position: center;
   margin-left: auto;
   cursor: pointer;
   background-repeat: no-repeat;
@@ -23,6 +24,7 @@
     width: 100%;
     background-repeat: no-repeat;
     border: 2px solid #fff;
+    border-radius: 2px;
     background-position: center;
   }
 }
