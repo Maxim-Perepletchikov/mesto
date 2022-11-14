@@ -21,5 +21,6 @@
 <p>
   <img src="./images/1280.jpg" width="300">
   <img src="./images/700.jpg" width="300">
+  <img src="./images/400.jpg" width="300">
 </p>
 ![Иллюстрация к проекту](./images/1280.jpg)![Иллюстрация к проекту](./images/700.jpg)![Иллюстрация к проекту](./images/400.jpg)
