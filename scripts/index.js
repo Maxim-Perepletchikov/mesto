@@ -1,9 +1,9 @@
 const popupElement = document.querySelector(".popup");
-const popupOpenButtonElement = document.querySelector(".profile__edit");
+const popupEditButtonElement = document.querySelector(".profile__edit");
 const popupCloseButtonElement = popupElement.querySelector(
   ".form__close-button"
 );
-const popupEditClose = [popupOpenButtonElement, popupCloseButtonElement];
+const popupEditClose = [popupEditButtonElement, popupCloseButtonElement];
 
 const profileTitleName = document.querySelector(".profile__title-name");
 const profileProfession = document.querySelector(".profile__profession");
@@ -19,10 +19,12 @@ likeElement.forEach((elem) =>
 popupEditClose.forEach((elem) =>
   elem.addEventListener("click", () => {
     popupElement.classList.toggle("popup_opened");
+    nameInput.value = profileTitleName.textContent;
+    jopInput.value = profileProfession.textContent;
   })
 );
 
-// ===============
+// ===============Form
 
 const formElement = document.querySelector(".form");
 const formInput = formElement.querySelectorAll(".form__input");
