@@ -12,6 +12,14 @@
   line-height: 22px;
 }
 
+@media screen and (max-width: 600px) {
+  .form__save-button {
+    margin-top: 45px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
 .form__save-button:hover {
   opacity: 0.8;
 }

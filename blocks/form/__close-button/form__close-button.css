@@ -9,6 +9,16 @@
   right: -40px;
   background: rgba(0, 0, 0, 0);
   background-image: url(../../../images/close-popup.png);
+  background-size: cover;
+}
+
+@media screen and (max-width: 600px) {
+  .form__close-button {
+    right: 0;
+    top: -40px;
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .form__close-button:hover {
