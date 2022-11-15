@@ -1,42 +1,52 @@
+// Popup
 const popupElement = document.querySelector(".popup");
-const popupEditButtonElement = document.querySelector(".profile__edit");
 const popupCloseButtonElement = popupElement.querySelector(
   ".form__close-button"
 );
-const popupEditClose = [popupEditButtonElement, popupCloseButtonElement];
 
+// Profile
 const profileTitleName = document.querySelector(".profile__title-name");
 const profileProfession = document.querySelector(".profile__profession");
+const popupEditButtonElement = document.querySelector(".profile__edit");
 
-const likeElement = document.querySelectorAll(".card__like");
-
-likeElement.forEach((elem) =>
-  elem.addEventListener("click", () =>
-    elem.classList.toggle("card__like_active")
-  )
-);
-
-popupEditClose.forEach((elem) =>
-  elem.addEventListener("click", () => {
-    popupElement.classList.toggle("popup_opened");
-    nameInput.value = profileTitleName.textContent;
-    jopInput.value = profileProfession.textContent;
-  })
-);
-
-// ===============Form
-
+// Form
 const formElement = document.querySelector(".form");
-const formInput = formElement.querySelectorAll(".form__input");
+const nameInput = formElement.querySelector(".form__input-name");
+const jopInput = formElement.querySelector(".form__input-job");
 
-const nameInput = formInput[0];
-const jopInput = formInput[1];
+// Слушатель кнопки редактирования
+popupEditButtonElement.addEventListener("click", () => {
+  popupElement.classList.add("popup_opened");
+  nameInput.value = profileTitleName.textContent;
+  jopInput.value = profileProfession.textContent;
+});
 
+// Слушатель кнопки закрытия popup
+popupCloseButtonElement.addEventListener("click", closePopup);
+
+// Слушатель формы на отправку данных
+formElement.addEventListener("submit", formSubmitHandler);
+
+// Функция сохранения
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileTitleName.textContent = nameInput.value;
   profileProfession.textContent = jopInput.value;
-  popupElement.classList.toggle("popup_opened");
+  closePopup();
 }
 
-formElement.addEventListener("submit", formSubmitHandler);
+// Функция закрытия popup
+function closePopup() {
+  popupElement.classList.remove("popup_opened");
+}
+
+// ===========Like===========
+// Элемент кнопки like
+// const likeElements = document.querySelectorAll(".card__like");
+
+// Слушатель кнопки Like
+// likeElements.forEach((elem) =>
+//   elem.addEventListener("click", () =>
+//     elem.classList.toggle("card__like_active")
+//   )
+// );
