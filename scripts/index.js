@@ -11,14 +11,14 @@ const popupEditButtonElement = document.querySelector(".profile__edit");
 
 // Form
 const formElement = document.querySelector(".form");
-const nameInput = formElement.querySelector(".form__input-name");
-const jopInput = formElement.querySelector(".form__input-job");
+const nameInput = formElement.querySelector("#nameInput");
+const jobInput = formElement.querySelector("#jobInput");
 
 // Слушатель кнопки редактирования
 popupEditButtonElement.addEventListener("click", () => {
   popupElement.classList.add("popup_opened");
   nameInput.value = profileTitleName.textContent;
-  jopInput.value = profileProfession.textContent;
+  jobInput.value = profileProfession.textContent;
 });
 
 // Слушатель кнопки закрытия popup
@@ -31,7 +31,7 @@ formElement.addEventListener("submit", formSubmitHandler);
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileTitleName.textContent = nameInput.value;
-  profileProfession.textContent = jopInput.value;
+  profileProfession.textContent = jobInput.value;
   closePopup();
 }
 
