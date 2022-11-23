@@ -74,15 +74,17 @@ const cards = [
 ];
 
 // Создание card
-const cardTemplate = document.querySelector("#card-template").content;
-const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-const gallery = document.querySelector(".gallery");
+cards.forEach((item) => {
+  const cardTemplate = document.querySelector("#card-template").content;
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const gallery = document.querySelector(".gallery");
 
-cardElement.querySelector(".card__image").src = cards[1].link;
-cardElement.querySelector(".card__image").alt = cards[1].name;
-cardElement.querySelector(".card__title").textContent = cards[1].name;
+  cardElement.querySelector(".card__image").src = item.link;
+  cardElement.querySelector(".card__image").alt = item.name;
+  cardElement.querySelector(".card__title").textContent = item.name;
 
-gallery.prepend(cardElement);
+  gallery.prepend(cardElement);
+});
 
 // Слушатель кнопки добавить изображение
 popupAddButtonElement.addEventListener("click", () => {
