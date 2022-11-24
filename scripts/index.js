@@ -16,17 +16,20 @@ const nameInput = formElement.querySelector("#nameInput");
 const jobInput = formElement.querySelector("#jobInput");
 
 // Clone popup
-const container = document.querySelector(".footer");
+const footer = document.querySelector(".footer");
 const popup2 = popupElement.cloneNode(true);
+const formImage = popup2.querySelector(".form");
 popup2.querySelector(".form__title").textContent = "Новое место";
 const nameInput2 = popup2.querySelector("#nameInput");
 const jobInput2 = popup2.querySelector("#jobInput");
 popup2.querySelector(".form__save-button").textContent = "Создать";
-
 popup2.querySelector(".form__close-button").addEventListener("click", () => {
   closePopup(popup2);
 });
-container.after(popup2);
+footer.after(popup2);
+
+// Gallery
+const gallery = document.querySelector(".gallery");
 
 // Функция открытия popup
 const openPopup = (popup) => {
@@ -77,14 +80,47 @@ const cards = [
 cards.forEach((item) => {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const gallery = document.querySelector(".gallery");
 
   cardElement.querySelector(".card__image").src = item.link;
   cardElement.querySelector(".card__image").alt = item.name;
   cardElement.querySelector(".card__title").textContent = item.name;
 
+  cardElement.querySelector(".card__like").addEventListener("click", (evt) => {
+    evt.target.classList.toggle("card__like_active");
+  });
+
   gallery.prepend(cardElement);
 });
+
+// ==================================
+const addCard = (cardName, path, des) => {
+  const cardTemplate = document.querySelector("#card-template").content;
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+
+  cardElement.querySelector(".card__image").src = path;
+  cardElement.querySelector(".card__image").alt = des;
+  cardElement.querySelector(".card__title").textContent = cardName;
+
+  cardElement.querySelector(".card__like").addEventListener("click", (evt) => {
+    evt.target.classList.toggle("card__like_active");
+  });
+
+  gallery.prepend(cardElement);
+};
+
+// =======
+const formSubmitHandlerImage = (evt) => {
+  evt.preventDefault();
+
+  addCard(nameInput2.value, jobInput2.value, nameInput2.value);
+
+  closePopup(popup2);
+};
+
+formImage.addEventListener("submit", formSubmitHandlerImage);
+// ==================================
+
+// addCard("Курган", "https://stihi.ru/pics/2019/03/03/9931.jpg", "Ночной Курган");
 
 // Слушатель кнопки добавить изображение
 popupAddButtonElement.addEventListener("click", () => {
@@ -107,14 +143,3 @@ popupCloseButtonElement.addEventListener("click", () =>
 
 // Слушатель формы на отправку данных
 formElement.addEventListener("submit", formSubmitHandler);
-
-// ===========Like===========
-// Элемент кнопки like
-// const likeElements = document.querySelectorAll(".card__like");
-
-// Слушатель кнопки Like
-// likeElements.forEach((elem) =>
-//   elem.addEventListener("click", () =>
-//     elem.classList.toggle("card__like_active")
-//   )
-// );
