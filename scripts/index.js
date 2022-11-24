@@ -103,18 +103,7 @@ const cards = [
 
 // Создание 6 начальных карточек
 cards.forEach((item) => {
-  const cardTemplate = document.querySelector("#card-template").content;
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-
-  cardElement.querySelector(".card__image").src = item.link;
-  cardElement.querySelector(".card__image").alt = item.name;
-  cardElement.querySelector(".card__title").textContent = item.name;
-
-  cardElement.querySelector(".card__like").addEventListener("click", (evt) => {
-    evt.target.classList.toggle("card__like_active");
-  });
-
-  gallery.prepend(cardElement);
+  createCard(item.name, item.link, item.name);
 });
 
 // Слушатель формы для добавления карточки
@@ -127,11 +116,11 @@ popupAddButtonElement.addEventListener("click", () => {
   openPopup(popup2);
 });
 
-// Слушатель кнопки редактирования
+// Слушатель кнопки редактирования профиля
 popupEditButtonElement.addEventListener("click", () => {
-  openPopup(popupElement);
   nameInput.value = profileTitleName.textContent;
   jobInput.value = profileProfession.textContent;
+  openPopup(popupElement);
 });
 
 // Слушатель кнопки закрытия popup
