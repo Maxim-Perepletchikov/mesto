@@ -36,7 +36,7 @@ const openPopup = (popup) => {
   popup.classList.add("popup_opened");
 };
 
-// Функция сохранения
+// Функция сохранения профиля
 const formSubmitHandler = (evt) => {
   evt.preventDefault();
   profileTitleName.textContent = nameInput.value;
@@ -47,6 +47,31 @@ const formSubmitHandler = (evt) => {
 // Функция закрытия popup
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
+};
+
+// Функция создания карточки
+const createCard = (cardName, path, des) => {
+  const cardTemplate = document.querySelector("#card-template").content;
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+
+  cardElement.querySelector(".card__image").src = path;
+  cardElement.querySelector(".card__image").alt = des;
+  cardElement.querySelector(".card__title").textContent = cardName;
+
+  cardElement.querySelector(".card__like").addEventListener("click", (evt) => {
+    evt.target.classList.toggle("card__like_active");
+  });
+
+  gallery.prepend(cardElement);
+};
+
+// Функция добавления карточки
+const formSubmitHandlerImage = (evt) => {
+  evt.preventDefault();
+
+  createCard(nameInput2.value, jobInput2.value, nameInput2.value);
+
+  closePopup(popup2);
 };
 
 const cards = [
@@ -76,7 +101,7 @@ const cards = [
   },
 ];
 
-// Создание card
+// Создание 6 начальных карточек
 cards.forEach((item) => {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
@@ -92,35 +117,8 @@ cards.forEach((item) => {
   gallery.prepend(cardElement);
 });
 
-// ==================================
-const addCard = (cardName, path, des) => {
-  const cardTemplate = document.querySelector("#card-template").content;
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-
-  cardElement.querySelector(".card__image").src = path;
-  cardElement.querySelector(".card__image").alt = des;
-  cardElement.querySelector(".card__title").textContent = cardName;
-
-  cardElement.querySelector(".card__like").addEventListener("click", (evt) => {
-    evt.target.classList.toggle("card__like_active");
-  });
-
-  gallery.prepend(cardElement);
-};
-
-// =======
-const formSubmitHandlerImage = (evt) => {
-  evt.preventDefault();
-
-  addCard(nameInput2.value, jobInput2.value, nameInput2.value);
-
-  closePopup(popup2);
-};
-
+// Слушатель формы для добавления карточки
 formImage.addEventListener("submit", formSubmitHandlerImage);
-// ==================================
-
-// addCard("Курган", "https://stihi.ru/pics/2019/03/03/9931.jpg", "Ночной Курган");
 
 // Слушатель кнопки добавить изображение
 popupAddButtonElement.addEventListener("click", () => {
@@ -141,5 +139,5 @@ popupCloseButtonElement.addEventListener("click", () =>
   closePopup(popupElement)
 );
 
-// Слушатель формы на отправку данных
+// Слушатель формы на отправку данных профиля
 formElement.addEventListener("submit", formSubmitHandler);
