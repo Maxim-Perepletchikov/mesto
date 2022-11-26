@@ -1,7 +1,14 @@
 // Popups
 const popupEditElement = document.querySelector(".popup_type-edit");
 const popupAddElement = document.querySelector(".popup_type-add");
+const popupImageElement = document.querySelector(".popup_type-image");
+const popupImage = document.querySelector(".popup__image");
+const popupImageTitle = document.querySelector(".popup__image-title");
 
+// Кнопка закрытия popup
+const popupCloseImageElement = popupImageElement.querySelector(
+  ".form__close-button"
+);
 const popupCloseButtonElement = popupEditElement.querySelector(
   ".form__close-button"
 );
@@ -16,7 +23,7 @@ const popupAddButtonElement = document.querySelector(".profile__add-button");
 const formProfileElement = popupEditElement.querySelector(".form");
 const nameInput = formProfileElement.querySelector("#nameInput");
 const jobInput = formProfileElement.querySelector("#jobInput");
-// Form add image
+// Form add card
 const formAddCardElement = popupAddElement.querySelector(".form");
 const cardTitle = popupAddElement.querySelector("#cardTitle");
 const pathImage = popupAddElement.querySelector("#pathImage");
@@ -52,12 +59,21 @@ const closePopup = (popup) => {
 const createCard = (data) => {
   const cardElement = cardTemplate.cloneNode(true);
 
-  cardElement.querySelector(".card__image").src = data.path;
-  cardElement.querySelector(".card__image").alt = data.cardName;
+  const cardImage = cardElement.querySelector(".card__image");
+
+  cardImage.src = data.path;
+  cardImage.alt = data.cardName;
   cardElement.querySelector(".card__title").textContent = data.cardName;
 
   cardElement.querySelector(".card__like").addEventListener("click", (evt) => {
     evt.target.classList.toggle("card__like_active");
+  });
+
+  cardImage.addEventListener("click", () => {
+    openPopup(popupImageElement);
+    popupImage.src = data.path;
+    popupImage.alt = data.cardName;
+    popupImageTitle.textContent = data.cardName;
   });
 
   cardElement
@@ -119,6 +135,10 @@ const cardsData = [
 cardsData.forEach((item) => {
   renderCard(item);
 });
+
+popupCloseImageElement.addEventListener("click", () =>
+  closePopup(popupImageElement)
+);
 
 // Слушатель формы для добавления карточки
 formAddCardElement.addEventListener("submit", formSubmitHandlerImage);
