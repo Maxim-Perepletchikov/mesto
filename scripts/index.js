@@ -7,7 +7,7 @@ const popupImageTitle = document.querySelector(".popup__image-title");
 
 // Кнопка закрытия popup
 const popupCloseImageElement = popupImageElement.querySelector(
-  ".form__close-button"
+  ".popup__close-button"
 );
 const popupCloseButtonElement = popupEditElement.querySelector(
   ".form__close-button"
