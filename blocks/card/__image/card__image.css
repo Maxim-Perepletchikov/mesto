@@ -6,3 +6,7 @@
   object-position: center;
   color: #fff;
 }
+
+.card__image:hover {
+  cursor: pointer;
+}
