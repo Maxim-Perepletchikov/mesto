@@ -1,33 +1,31 @@
+// import cardsData from "./cardsArray.js";
+
 // Popups
-const popupEditElement = document.querySelector(".popup_type-edit");
-const popupAddElement = document.querySelector(".popup_type-add");
-const popupImageElement = document.querySelector(".popup_type-image");
-const popupImage = document.querySelector(".popup__image");
-const popupImageTitle = document.querySelector(".popup__image-title");
+const popupEdit = document.querySelector(".popup_type-edit");
+const popupAdd = document.querySelector(".popup_type-add");
+const popupImage = document.querySelector(".popup_type-image");
+const popupFullImage = popupImage.querySelector(".popup__image");
+const popupImageTitle = popupImage.querySelector(".popup__image-title");
 
 // Кнопка закрытия popup
-const popupCloseImageElement = popupImageElement.querySelector(
-  ".popup__close-button"
-);
-const popupCloseButtonElement = popupEditElement.querySelector(
-  ".form__close-button"
-);
+const popupCloseImage = popupImage.querySelector(".popup__close-button");
+const popupCloseButtonEdit = popupEdit.querySelector(".form__close-button");
 
 // Profile
 const profileTitleName = document.querySelector(".profile__title-name");
 const profileProfession = document.querySelector(".profile__profession");
-const popupEditButtonElement = document.querySelector(".profile__edit");
-const popupAddButtonElement = document.querySelector(".profile__add-button");
+const popupEditButton = document.querySelector(".profile__edit");
+const popupAddButton = document.querySelector(".profile__add-button");
 
 // Form profile
-const formProfileElement = popupEditElement.querySelector(".form");
-const nameInput = formProfileElement.querySelector("#nameInput");
-const jobInput = formProfileElement.querySelector("#jobInput");
+const formProfile = popupEdit.querySelector(".form");
+const nameInput = formProfile.querySelector("#nameInput");
+const jobInput = formProfile.querySelector("#jobInput");
 // Form add card
-const formAddCardElement = popupAddElement.querySelector(".form");
-const cardTitle = popupAddElement.querySelector("#cardTitle");
-const pathImage = popupAddElement.querySelector("#pathImage");
-const closeButtonAddCard = popupAddElement.querySelector(".form__close-button");
+const formAddCard = popupAdd.querySelector(".form");
+const cardTitle = popupAdd.querySelector("#cardTitle");
+const pathImage = popupAdd.querySelector("#pathImage");
+const closeButtonAddCard = popupAdd.querySelector(".form__close-button");
 
 // Gallery
 const gallery = document.querySelector(".gallery");
@@ -43,11 +41,11 @@ const openPopup = (popup) => {
 };
 
 // Функция сохранения профиля
-const formSubmitHandler = (evt) => {
+const formSubmitHandlerProfile = (evt) => {
   evt.preventDefault();
   profileTitleName.textContent = nameInput.value;
   profileProfession.textContent = jobInput.value;
-  closePopup(popupEditElement);
+  closePopup(popupEdit);
 };
 
 // Функция закрытия popup
@@ -56,33 +54,31 @@ const closePopup = (popup) => {
 };
 
 // Функция создания карточки
-const createCard = (data) => {
-  const cardElement = cardTemplate.cloneNode(true);
+const createCard = ({ cardName, path }) => {
+  const card = cardTemplate.cloneNode(true);
 
-  const cardImage = cardElement.querySelector(".card__image");
+  const cardImage = card.querySelector(".card__image");
 
-  cardImage.src = data.path;
-  cardImage.alt = data.cardName;
-  cardElement.querySelector(".card__title").textContent = data.cardName;
+  cardImage.src = path;
+  cardImage.alt = cardName;
+  card.querySelector(".card__title").textContent = cardName;
 
-  cardElement.querySelector(".card__like").addEventListener("click", (evt) => {
+  card.querySelector(".card__like").addEventListener("click", (evt) => {
     evt.target.classList.toggle("card__like_active");
   });
 
   cardImage.addEventListener("click", () => {
-    openPopup(popupImageElement);
-    popupImage.src = data.path;
-    popupImage.alt = data.cardName;
-    popupImageTitle.textContent = data.cardName;
+    openPopup(popupImage);
+    popupFullImage.src = path;
+    popupFullImage.alt = cardName;
+    popupImageTitle.textContent = cardName;
   });
 
-  cardElement
-    .querySelector(".card__delete-button")
-    .addEventListener("click", (evt) => {
-      evt.target.closest(".card").remove();
-    });
+  card.querySelector(".card__delete-button").addEventListener("click", () => {
+    card.remove();
+  });
 
-  return cardElement;
+  return card;
 };
 
 // Функция добавления карточки
@@ -92,7 +88,7 @@ const renderCard = (data) => {
 };
 
 // Функция для отправки формы для карточки
-const formSubmitHandlerImage = (evt) => {
+const formImageSubmitHandler = (evt) => {
   evt.preventDefault();
 
   const card = {
@@ -101,7 +97,7 @@ const formSubmitHandlerImage = (evt) => {
   };
 
   renderCard(card);
-  closePopup(popupAddElement);
+  closePopup(popupAdd);
 };
 
 const cardsData = [
@@ -132,39 +128,33 @@ const cardsData = [
 ];
 
 // Создание 6 начальных карточек
-cardsData.forEach((item) => {
-  renderCard(item);
-});
+cardsData.forEach(renderCard);
 
-popupCloseImageElement.addEventListener("click", () =>
-  closePopup(popupImageElement)
-);
+popupCloseImage.addEventListener("click", () => closePopup(popupImage));
 
 // Слушатель формы для добавления карточки
-formAddCardElement.addEventListener("submit", formSubmitHandlerImage);
+formAddCard.addEventListener("submit", formImageSubmitHandler);
 
 // Слушатель кнопки добавить изображение
-popupAddButtonElement.addEventListener("click", () => {
-  cardTitle.value = "Название";
-  pathImage.value = "Ссылка на картинку";
-  openPopup(popupAddElement);
+popupAddButton.addEventListener("click", () => {
+  cardTitle.value = "";
+  pathImage.value = "";
+  openPopup(popupAdd);
 });
 
 closeButtonAddCard.addEventListener("click", () => {
-  closePopup(popupAddElement);
+  closePopup(popupAdd);
 });
 
 // Слушатель кнопки редактирования профиля
-popupEditButtonElement.addEventListener("click", () => {
+popupEditButton.addEventListener("click", () => {
   nameInput.value = profileTitleName.textContent;
   jobInput.value = profileProfession.textContent;
-  openPopup(popupEditElement);
+  openPopup(popupEdit);
 });
 
 // Слушатель кнопки закрытия popup
-popupCloseButtonElement.addEventListener("click", () =>
-  closePopup(popupEditElement)
-);
+popupCloseButtonEdit.addEventListener("click", () => closePopup(popupEdit));
 
 // Слушатель формы на отправку данных профиля
-formProfileElement.addEventListener("submit", formSubmitHandler);
+formProfile.addEventListener("submit", formSubmitHandlerProfile);
