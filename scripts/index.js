@@ -1,5 +1,3 @@
-// import cardsData from "./cardsArray.js";
-
 // Popups
 const popupEdit = document.querySelector(".popup_type-edit");
 const popupAdd = document.querySelector(".popup_type-add");
@@ -99,33 +97,6 @@ const formImageSubmitHandler = (evt) => {
   renderCard(card);
   closePopup(popupAdd);
 };
-
-const cardsData = [
-  {
-    cardName: "Архыз",
-    path: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    cardName: "Челябинская область",
-    path: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    cardName: "Иваново",
-    path: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    cardName: "Камчатка",
-    path: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    cardName: "Холмогорский район",
-    path: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    cardName: "Байкал",
-    path: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 
 // Создание 6 начальных карточек
 cardsData.forEach(renderCard);

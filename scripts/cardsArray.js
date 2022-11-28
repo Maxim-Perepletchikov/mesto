@@ -24,5 +24,3 @@ const cardsData = [
     path: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
-// Не понимаю почему не получается подключить
-export default cardsData;
