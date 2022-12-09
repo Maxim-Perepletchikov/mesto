@@ -17,12 +17,12 @@ const popupAddButton = document.querySelector(".profile__add-button");
 
 // Form profile
 const formProfile = popupEdit.querySelector(".form");
-const nameInput = formProfile.querySelector("#nameInput");
-const jobInput = formProfile.querySelector("#jobInput");
+const nameInput = formProfile.querySelector("#name-input");
+const jobInput = formProfile.querySelector("#job-input");
 // Form add card
 const formAddCard = popupAdd.querySelector(".form");
-const cardTitle = popupAdd.querySelector("#cardTitle");
-const pathImage = popupAdd.querySelector("#pathImage");
+const cardTitle = popupAdd.querySelector("#title-input");
+const pathImage = popupAdd.querySelector("#path-input");
 const closeButtonAddCard = popupAdd.querySelector(".form__close-button");
 
 // Gallery

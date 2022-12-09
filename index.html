@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./pages/index.css" />
     <script src="./scripts/cardsArray.js" defer></script>
+    <script src="./scripts/validate.js" defer></script>
     <script src="./scripts/index.js" defer></script>
     <title>Mesto</title>
   </head>
@@ -50,7 +51,7 @@
 
       <div class="popup popup_type-edit">
         <div class="popup__form-container">
-          <form class="form" name="formEdit">
+          <form class="form" name="formEdit" novalidate>
             <button
               class="form__close-button"
               type="button"
@@ -60,19 +61,25 @@
             <input
               class="form__input"
               type="text"
-              id="nameInput"
-              name="nameInput"
+              id="name-input"
+              name="name-input"
               placeholder="Имя"
+              minlength="2"
+              maxlength="40"
               required
             />
+            <span class="form__input-error name-input-error"></span>
             <input
               class="form__input"
               type="text"
-              id="jobInput"
-              name="jobInput"
-              placeholder="Профессия"
+              id="job-input"
+              name="job-input"
+              placeholder="О себе"
+              minlength="2"
+              maxlength="200"
               required
             />
+            <span class="form__input-error job-input-error"></span>
             <button class="form__save-button" type="submit">Сохранить</button>
           </form>
         </div>
@@ -80,7 +87,7 @@
 
       <div class="popup popup_type-add">
         <div class="popup__form-container">
-          <form class="form" action="#" name="formEdit">
+          <form class="form" name="formEdit" novalidate>
             <button
               class="form__close-button"
               type="button"
@@ -90,19 +97,23 @@
             <input
               class="form__input"
               type="text"
-              id="cardTitle"
-              name="cardTitle"
+              id="title-input"
+              name="title-input"
               placeholder="Название"
+              minlength="2"
+              maxlength="30"
               required
             />
+            <span class="form__input-error title-input-error"></span>
             <input
               class="form__input"
               type="url"
-              id="pathImage"
-              name="pathImage"
+              id="path-input"
+              name="path-input"
               placeholder="Ссылка на картинку"
               required
             />
+            <span class="form__input-error path-input-error"></span>
             <button class="form__save-button" type="submit">Создать</button>
           </form>
         </div>
