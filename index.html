@@ -58,28 +58,32 @@
               aria-label="Кнопка закрытия"
             ></button>
             <h2 class="form__title">Редактировать профиль</h2>
-            <input
-              class="form__input"
-              type="text"
-              id="name-input"
-              name="name-input"
-              placeholder="Имя"
-              minlength="2"
-              maxlength="40"
-              required
-            />
-            <span class="form__input-error name-input-error"></span>
-            <input
-              class="form__input"
-              type="text"
-              id="job-input"
-              name="job-input"
-              placeholder="О себе"
-              minlength="2"
-              maxlength="200"
-              required
-            />
-            <span class="form__input-error job-input-error"></span>
+            <label class="form__label">
+              <input
+                class="form__input"
+                type="text"
+                id="name-input"
+                name="name-input"
+                placeholder="Имя"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span class="form__input-error name-input-error"></span>
+            </label>
+            <label class="form__label">
+              <input
+                class="form__input"
+                type="text"
+                id="job-input"
+                name="job-input"
+                placeholder="О себе"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span class="form__input-error job-input-error"></span>
+            </label>
             <button class="form__save-button" type="submit">Сохранить</button>
           </form>
         </div>
@@ -94,26 +98,30 @@
               aria-label="Кнопка закрытия"
             ></button>
             <h2 class="form__title">Новое место</h2>
-            <input
-              class="form__input"
-              type="text"
-              id="title-input"
-              name="title-input"
-              placeholder="Название"
-              minlength="2"
-              maxlength="30"
-              required
-            />
-            <span class="form__input-error title-input-error"></span>
-            <input
-              class="form__input"
-              type="url"
-              id="path-input"
-              name="path-input"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span class="form__input-error path-input-error"></span>
+            <label class="form__label">
+              <input
+                class="form__input"
+                type="text"
+                id="title-input"
+                name="title-input"
+                placeholder="Название"
+                minlength="2"
+                maxlength="30"
+                required
+              />
+              <span class="form__input-error title-input-error"></span>
+            </label>
+            <label class="form__label">
+              <input
+                class="form__input"
+                type="url"
+                id="path-input"
+                name="path-input"
+                placeholder="Ссылка на картинку"
+                required
+              />
+              <span class="form__input-error path-input-error"></span>
+            </label>
             <button class="form__save-button" type="submit">Создать</button>
           </form>
         </div>
