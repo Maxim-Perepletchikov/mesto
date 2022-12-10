@@ -110,6 +110,9 @@ formAddCard.addEventListener("submit", formImageSubmitHandler);
 popupAddButton.addEventListener("click", () => {
   cardTitle.value = "";
   pathImage.value = "";
+  const formSaveButton = popupAdd.querySelector(".form__save-button");
+  formSaveButton.classList.add("form__save-button-disabled");
+  formSaveButton.disabled = true;
   openPopup(popupAdd);
 });
 
@@ -121,6 +124,9 @@ closeButtonAddCard.addEventListener("click", () => {
 popupEditButton.addEventListener("click", () => {
   nameInput.value = profileTitleName.textContent;
   jobInput.value = profileProfession.textContent;
+  const formSaveButton = popupEdit.querySelector(".form__save-button");
+  formSaveButton.classList.remove("form__save-button-disabled");
+  formSaveButton.disabled = false;
   openPopup(popupEdit);
 });
 

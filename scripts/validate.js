@@ -17,7 +17,7 @@ const hideInputError = (formElement, inputElement) => {
 };
 
 // Функция, которая проверяет валидность поля
-const isValid = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
@@ -25,13 +25,34 @@ const isValid = (formElement, inputElement) => {
   }
 };
 
+// Функция, которая проверяет все поля input
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+// Функция, которая отключает и включает кнопку
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.disabled = true;
+    buttonElement.classList.add("form__save-button-disabled");
+  } else {
+    buttonElement.disabled = false;
+    buttonElement.classList.remove("form__save-button-disabled");
+  }
+};
+
 // Функция, которая добавит обработчики сразу всем полям формы
 const setEventListeners = (formElement) => {
   const inputList = [...formElement.querySelectorAll(".form__input")];
+  const buttonElement = formElement.querySelector(".form__save-button");
+  toggleButtonState(inputList, buttonElement);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
-      isValid(formElement, inputElement);
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
@@ -41,8 +62,20 @@ const enableValidation = () => {
   const formList = [...document.querySelectorAll(".form")];
 
   formList.forEach((formElement) => {
+    formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
     setEventListeners(formElement);
   });
 };
 
 enableValidation();
+
+const obj = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__save-button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "form__input-error",
+};
