@@ -51,6 +51,20 @@ const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
 };
 
+const closeClickPopup = (popup) => {
+  popup.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("popup")) {
+      closePopup(popup);
+    }
+
+    window.addEventListener("keyup", (evt) => {
+      if (evt.key === "Escape") {
+        closePopup(popup);
+      }
+    });
+  });
+};
+
 // Функция создания карточки
 const createCard = ({ cardName, path }) => {
   const card = cardTemplate.cloneNode(true);
@@ -67,6 +81,7 @@ const createCard = ({ cardName, path }) => {
 
   cardImage.addEventListener("click", () => {
     openPopup(popupImage);
+    closeClickPopup(popupImage);
     popupFullImage.src = path;
     popupFullImage.alt = cardName;
     popupImageTitle.textContent = cardName;
@@ -114,6 +129,7 @@ popupAddButton.addEventListener("click", () => {
   formSaveButton.classList.add("form__save-button-disabled");
   formSaveButton.disabled = true;
   openPopup(popupAdd);
+  closeClickPopup(popupAdd);
 });
 
 closeButtonAddCard.addEventListener("click", () => {
@@ -128,6 +144,7 @@ popupEditButton.addEventListener("click", () => {
   formSaveButton.classList.remove("form__save-button-disabled");
   formSaveButton.disabled = false;
   openPopup(popupEdit);
+  closeClickPopup(popupEdit);
 });
 
 // Слушатель кнопки закрытия popup
