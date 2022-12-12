@@ -69,13 +69,11 @@ const enableValidation = () => {
   });
 };
 
-enableValidation();
-
-const obj = {
+enableValidation({
   formSelector: ".form",
   inputSelector: ".form__input",
   submitButtonSelector: ".form__save-button",
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "form__input-error",
-};
+});

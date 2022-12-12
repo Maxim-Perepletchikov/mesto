@@ -33,9 +33,19 @@ const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 
+// Функция закрытия popup по Escape
+const handlerKeyUp = (evt) => {
+  if (evt.key === "Escape") {
+    const openPopup = document.querySelector(".popup_opened");
+    closePopup(openPopup);
+  }
+};
+
 // Функция открытия popup
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
+
+  document.addEventListener("keyup", handlerKeyUp);
 };
 
 // Функция сохранения профиля
@@ -49,19 +59,15 @@ const formSubmitHandlerProfile = (evt) => {
 // Функция закрытия popup
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keyup", handlerKeyUp);
 };
 
+// Функция закрытия popup по клюку
 const closeClickPopup = (popup) => {
   popup.addEventListener("click", (evt) => {
     if (evt.target.classList.contains("popup")) {
       closePopup(popup);
     }
-
-    window.addEventListener("keyup", (evt) => {
-      if (evt.key === "Escape") {
-        closePopup(popup);
-      }
-    });
   });
 };
 
