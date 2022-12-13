@@ -46,8 +46,6 @@ const handlerKeyUp = (evt) => {
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
 
-  resetValidation(popup);
-
   document.addEventListener("keyup", handlerKeyUp);
 };
 
@@ -123,6 +121,7 @@ formAddCard.addEventListener("submit", formImageSubmitHandler);
 // Слушатель кнопки добавить изображение
 popupAddButton.addEventListener("click", () => {
   formAddCard.reset();
+  resetValidation(popupAdd);
   const formSaveButton = popupAdd.querySelector(".form__save-button");
   formSaveButton.classList.add("form__save-button_disabled");
   formSaveButton.disabled = true;
@@ -135,6 +134,7 @@ closeButtonAddCard.addEventListener("click", () => {
 
 // Слушатель кнопки редактирования профиля
 popupEditButton.addEventListener("click", () => {
+  resetValidation(popupEdit);
   nameInput.value = profileTitleName.textContent;
   jobInput.value = profileProfession.textContent;
   const formSaveButton = popupEdit.querySelector(".form__save-button");
