@@ -1,4 +1,5 @@
 // Popups
+const popups = document.querySelectorAll(".popup");
 const popupEdit = document.querySelector(".popup_type-edit");
 const popupAdd = document.querySelector(".popup_type-add");
 const popupImage = document.querySelector(".popup_type-image");
@@ -62,15 +63,6 @@ const closePopup = (popup) => {
   document.removeEventListener("keyup", handlerKeyUp);
 };
 
-// Функция закрытия popup по клюку
-const closeClickPopup = (popup) => {
-  popup.addEventListener("click", (evt) => {
-    if (evt.target.classList.contains("popup")) {
-      closePopup(popup);
-    }
-  });
-};
-
 // Функция создания карточки
 const createCard = ({ cardName, path }) => {
   const card = cardTemplate.cloneNode(true);
@@ -87,7 +79,6 @@ const createCard = ({ cardName, path }) => {
 
   cardImage.addEventListener("click", () => {
     openPopup(popupImage);
-    closeClickPopup(popupImage);
     popupFullImage.src = path;
     popupFullImage.alt = cardName;
     popupImageTitle.textContent = cardName;
@@ -135,7 +126,6 @@ popupAddButton.addEventListener("click", () => {
   formSaveButton.classList.add("form__save-button_disabled");
   formSaveButton.disabled = true;
   openPopup(popupAdd);
-  closeClickPopup(popupAdd);
 });
 
 closeButtonAddCard.addEventListener("click", () => {
@@ -150,7 +140,6 @@ popupEditButton.addEventListener("click", () => {
   formSaveButton.classList.remove("form__save-button_disabled");
   formSaveButton.disabled = false;
   openPopup(popupEdit);
-  closeClickPopup(popupEdit);
 });
 
 // Слушатель кнопки закрытия popup
@@ -158,3 +147,12 @@ popupCloseButtonEdit.addEventListener("click", () => closePopup(popupEdit));
 
 // Слушатель формы на отправку данных профиля
 formProfile.addEventListener("submit", formSubmitHandlerProfile);
+
+// Закрытие popup кликом мыши
+popups.forEach((popup) => {
+  popup.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("popup")) {
+      closePopup(popup);
+    }
+  });
+});
