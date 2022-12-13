@@ -120,8 +120,7 @@ formAddCard.addEventListener("submit", formImageSubmitHandler);
 
 // Слушатель кнопки добавить изображение
 popupAddButton.addEventListener("click", () => {
-  cardTitle.value = "";
-  pathImage.value = "";
+  formAddCard.reset();
   const formSaveButton = popupAdd.querySelector(".form__save-button");
   formSaveButton.classList.add("form__save-button_disabled");
   formSaveButton.disabled = true;
