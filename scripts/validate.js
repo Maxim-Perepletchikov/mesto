@@ -25,6 +25,15 @@ const hideInputError = (
   formError.classList.remove(errorClass);
 };
 
+const resetValidation = (popup) => {
+  const form = popup.querySelector(".form");
+  const input = form.querySelector(".form__input");
+  const formError = form.querySelector(`.${input.id}-error`);
+  input.classList.remove("popup__input_type_error");
+  formError.textContent = "";
+  formError.classList.remove("form__input-error");
+};
+
 // Функция, которая проверяет валидность поля
 const checkInputValidity = (formElement, inputElement, rest) => {
   if (!inputElement.validity.valid) {

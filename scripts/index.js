@@ -46,6 +46,8 @@ const handlerKeyUp = (evt) => {
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
 
+  resetValidation(popup);
+
   document.addEventListener("keyup", handlerKeyUp);
 };
 
