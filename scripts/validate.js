@@ -26,11 +26,13 @@ const hideInputError = (
 };
 
 const resetValidation = (popup) => {
-  const input = popup.querySelector(".form__input");
-  const formError = popup.querySelector(`.${input.id}-error`);
-  input.classList.remove("popup__input_type_error");
-  formError.textContent = "";
-  formError.classList.remove("form__input-error");
+  const inputs = popup.querySelectorAll(".form__input");
+  inputs.forEach((input) => {
+    const formError = popup.querySelector(`.${input.id}-error`);
+    input.classList.remove("popup__input_type_error");
+    formError.textContent = "";
+    formError.classList.remove("form__input-error");
+  });
 };
 
 // Функция, которая проверяет валидность поля
