@@ -1,7 +1,7 @@
 export default class Card {
-  constructor(title, path, cardSelector) {
-    this._title = title;
-    this._path = path;
+  constructor(data, cardSelector) {
+    this._title = data.cardName;
+    this._path = data.path;
     this._cardSelector = cardSelector;
   }
 
@@ -50,9 +50,10 @@ export default class Card {
   }
 
   _handleImageClick() {
-    openPopup(popupImage);
-    popupFullImage.src = this._path;
-    popupFullImage.alt = this._title;
-    popupImageTitle.textContent = this._title;
+    document.querySelector(".popup__image").src = this._path;
+    document.querySelector(".popup__image").alt = this._title;
+    document.querySelector(".popup__image-title").textContent = this._title;
+
+    document.querySelector(".popup_type-image").classList.add("popup_opened");
   }
 }

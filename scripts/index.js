@@ -1,3 +1,5 @@
+import Card from "./card.js";
+
 // Popups
 const popups = document.querySelectorAll(".popup");
 const popupEdit = document.querySelector(".popup_type-edit");
@@ -78,10 +80,10 @@ const createCard = ({ cardName, path }) => {
   });
 
   cardImage.addEventListener("click", () => {
-    openPopup(popupImage);
     popupFullImage.src = path;
     popupFullImage.alt = cardName;
     popupImageTitle.textContent = cardName;
+    openPopup(popupImage);
   });
 
   card.querySelector(".card__delete-button").addEventListener("click", () => {
@@ -93,8 +95,9 @@ const createCard = ({ cardName, path }) => {
 
 // Функция добавления карточки
 const renderCard = (data) => {
-  const card = createCard(data);
-  gallery.prepend(card);
+  // const card = createCard(data);
+  const card = new Card(data, "#card-template");
+  gallery.prepend(card.generateCard());
 };
 
 // Функция для отправки формы для карточки
