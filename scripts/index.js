@@ -1,12 +1,12 @@
-import Card from "./card.js";
+import Card from "./Card.js";
 
 // Popups
 const popups = document.querySelectorAll(".popup");
 const popupEdit = document.querySelector(".popup_type-edit");
 const popupAdd = document.querySelector(".popup_type-add");
 const popupImage = document.querySelector(".popup_type-image");
-const popupFullImage = popupImage.querySelector(".popup__image");
-const popupImageTitle = popupImage.querySelector(".popup__image-title");
+// const popupFullImage = popupImage.querySelector(".popup__image");
+// const popupImageTitle = popupImage.querySelector(".popup__image-title");
 
 // Кнопка закрытия popup
 const popupCloseImage = popupImage.querySelector(".popup__close-button");
@@ -32,9 +32,9 @@ const closeButtonAddCard = popupAdd.querySelector(".form__close-button");
 const gallery = document.querySelector(".gallery");
 
 // Template
-const cardTemplate = document
-  .querySelector("#card-template")
-  .content.querySelector(".card");
+// const cardTemplate = document
+//   .querySelector("#card-template")
+//   .content.querySelector(".card");
 
 // Функция закрытия popup по Escape
 const handlerKeyUp = (evt) => {
@@ -66,32 +66,32 @@ const closePopup = (popup) => {
 };
 
 // Функция создания карточки
-const createCard = ({ cardName, path }) => {
-  const card = cardTemplate.cloneNode(true);
+// const createCard = ({ cardName, path }) => {
+//   const card = cardTemplate.cloneNode(true);
 
-  const cardImage = card.querySelector(".card__image");
+//   const cardImage = card.querySelector(".card__image");
 
-  cardImage.src = path;
-  cardImage.alt = cardName;
-  card.querySelector(".card__title").textContent = cardName;
+//   cardImage.src = path;
+//   cardImage.alt = cardName;
+//   card.querySelector(".card__title").textContent = cardName;
 
-  card.querySelector(".card__like").addEventListener("click", (evt) => {
-    evt.target.classList.toggle("card__like_active");
-  });
+//   card.querySelector(".card__like").addEventListener("click", (evt) => {
+//     evt.target.classList.toggle("card__like_active");
+//   });
 
-  cardImage.addEventListener("click", () => {
-    popupFullImage.src = path;
-    popupFullImage.alt = cardName;
-    popupImageTitle.textContent = cardName;
-    openPopup(popupImage);
-  });
+//   cardImage.addEventListener("click", () => {
+//     popupFullImage.src = path;
+//     popupFullImage.alt = cardName;
+//     popupImageTitle.textContent = cardName;
+//     openPopup(popupImage);
+//   });
 
-  card.querySelector(".card__delete-button").addEventListener("click", () => {
-    card.remove();
-  });
+//   card.querySelector(".card__delete-button").addEventListener("click", () => {
+//     card.remove();
+//   });
 
-  return card;
-};
+//   return card;
+// };
 
 // Функция добавления карточки
 const renderCard = (data) => {
