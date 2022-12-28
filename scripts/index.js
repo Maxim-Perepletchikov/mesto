@@ -1,4 +1,6 @@
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import { cardsData, obj } from "./data.js";
 
 // Popups
 const popups = document.querySelectorAll(".popup");
@@ -30,6 +32,10 @@ const closeButtonAddCard = popupAdd.querySelector(".form__close-button");
 
 // Gallery
 const gallery = document.querySelector(".gallery");
+
+// Экземпляры класса FormValidator
+const formValidProfile = new FormValidator(obj, formProfile);
+const formValidAddCard = new FormValidator(obj, formAddCard);
 
 // Template
 // const cardTemplate = document
@@ -124,7 +130,7 @@ formAddCard.addEventListener("submit", formImageSubmitHandler);
 // Слушатель кнопки добавить изображение
 popupAddButton.addEventListener("click", () => {
   formAddCard.reset();
-  resetValidation(popupAdd);
+  // resetValidation(popupAdd);
   const formSaveButton = popupAdd.querySelector(".form__save-button");
   formSaveButton.classList.add("form__save-button_disabled");
   formSaveButton.disabled = true;
@@ -137,7 +143,7 @@ closeButtonAddCard.addEventListener("click", () => {
 
 // Слушатель кнопки редактирования профиля
 popupEditButton.addEventListener("click", () => {
-  resetValidation(popupEdit);
+  // resetValidation(popupEdit);
   nameInput.value = profileTitleName.textContent;
   jobInput.value = profileProfession.textContent;
   const formSaveButton = popupEdit.querySelector(".form__save-button");
@@ -160,3 +166,6 @@ popups.forEach((popup) => {
     }
   });
 });
+
+formValidProfile.enableValidation();
+formValidAddCard.enableValidation();
