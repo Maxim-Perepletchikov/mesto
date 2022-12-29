@@ -27,6 +27,8 @@ const formAddCard = popupAdd.querySelector(".form");
 const cardTitle = popupAdd.querySelector("#title-input");
 const pathImage = popupAdd.querySelector("#path-input");
 const closeButtonAddCard = popupAdd.querySelector(".form__close-button");
+const popupImageCaption = popupImage.querySelector(".popup__image-title");
+const popupImageFull = popupImage.querySelector(".popup__image");
 
 // Gallery
 const gallery = document.querySelector(".gallery");
@@ -64,9 +66,16 @@ const closePopup = (popup) => {
   document.removeEventListener("keyup", handlerKeyUp);
 };
 
+const handleImageClick = (title, path) => {
+  popupImageFull.src = path;
+  popupImageFull.alt = title;
+  popupImageCaption.textContent = title;
+  openPopup(popupImage);
+};
+
 // Функция добавления карточки
 const renderCard = (data) => {
-  const card = new Card(data, "#card-template");
+  const card = new Card(data, "#card-template", handleImageClick);
   gallery.prepend(card.generateCard());
 };
 
