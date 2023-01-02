@@ -6,6 +6,8 @@ export default class FormValidator {
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
     this._form = form;
+    this._inputList = [...this._form.querySelectorAll(this._inputSelector)];
+    this._buttonElement = this._form.querySelector(this._submitButtonSelector);
   }
 
   // Функция, которая добавляет класс с ошибкой
@@ -36,51 +38,41 @@ export default class FormValidator {
   }
 
   // Функция, которая проверяет все поля input
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => !inputElement.validity.valid);
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => !inputElement.validity.valid);
   }
 
   // Функция, которая отключает и включает кнопку
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      buttonElement.disabled = true;
-      buttonElement.classList.add(this._inactiveButtonClass);
+  _toggleButtonState() {
+    if (this._hasInvalidInput(this._inputList)) {
+      this._buttonElement.disabled = true;
+      this._buttonElement.classList.add(this._inactiveButtonClass);
     } else {
-      buttonElement.disabled = false;
-      buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.disabled = false;
+      this._buttonElement.classList.remove(this._inactiveButtonClass);
     }
   }
 
   // Функция, которая добавит обработчики сразу всем полям формы
   _setEventListeners() {
-    const inputList = [...this._form.querySelectorAll(this._inputSelector)];
-    const buttonElement = this._form.querySelector(this._submitButtonSelector);
+    this._toggleButtonState(this._inputList, this._buttonElement);
 
-    this._toggleButtonState(inputList, buttonElement);
-
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState(this._inputList, this._buttonElement);
       });
     });
   }
 
   // Функция сброса ошибок форм
-  resetValidation(form) {
-    const inputs = form.querySelectorAll(this._inputSelector);
-    inputs.forEach((input) => {
-      const formError = form.querySelector(`.${input.id}-error`);
-      input.classList.remove(this._inputErrorClass);
-      formError.textContent = "";
-      formError.classList.remove(this._errorClass);
+  resetValidation() {
+    this._inputList.forEach((input) => {
+      this._hideInputError(input);
     });
   }
 
   enableValidation() {
-    this._form.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
     this._setEventListeners();
   }
 }
