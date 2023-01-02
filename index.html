@@ -56,7 +56,7 @@
           ></button>
           <form class="form" name="formEdit" novalidate>
             <h2 class="form__title">Редактировать профиль</h2>
-            <label class="form__label">
+            <div class="form__error-container">
               <input
                 class="form__input"
                 type="text"
@@ -68,8 +68,8 @@
                 required
               />
               <span class="form__input-error name-input-error"></span>
-            </label>
-            <label class="form__label">
+            </div>
+            <div class="form__error-container">
               <input
                 class="form__input"
                 type="text"
@@ -81,7 +81,7 @@
                 required
               />
               <span class="form__input-error job-input-error"></span>
-            </label>
+            </div>
             <button class="form__save-button" type="submit">Сохранить</button>
           </form>
         </div>
@@ -96,7 +96,7 @@
           ></button>
           <form class="form" name="formEdit" novalidate>
             <h2 class="form__title">Новое место</h2>
-            <label class="form__label">
+            <div class="form__error-container">
               <input
                 class="form__input"
                 type="text"
@@ -108,8 +108,8 @@
                 required
               />
               <span class="form__input-error title-input-error"></span>
-            </label>
-            <label class="form__label">
+            </div>
+            <div class="form__error-container">
               <input
                 class="form__input"
                 type="url"
@@ -119,7 +119,7 @@
                 required
               />
               <span class="form__input-error path-input-error"></span>
-            </label>
+            </div>
             <button class="form__save-button" type="submit">Создать</button>
           </form>
         </div>
