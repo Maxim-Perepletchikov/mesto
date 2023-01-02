@@ -66,11 +66,21 @@ export default class FormValidator {
   }
 
   // Функция сброса ошибок форм
-  resetValidation() {
+  resetValidation(activeButton) {
     this._inputList.forEach((input) => {
       this._hideInputError(input);
     });
+    if (activeButton) {
+      this._buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.disabled = activeButton;
+    } else {
+      this._buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.disabled = activeButton;
+    }
   }
+
+  // submitButtonSelector: ".form__save-button",
+  // inactiveButtonClass: "form__save-button_disabled",
 
   enableValidation() {
     this._setEventListeners();

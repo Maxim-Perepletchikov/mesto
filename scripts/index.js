@@ -8,9 +8,8 @@ const popupEdit = document.querySelector(".popup_type-edit");
 const popupAdd = document.querySelector(".popup_type-add");
 const popupImage = document.querySelector(".popup_type-image");
 
-// Кнопка закрытия popup
-const popupCloseImage = popupImage.querySelector(".popup__close-button");
-const popupCloseButtonEdit = popupEdit.querySelector(".form__close-button");
+// Кнопки закрытия popup
+const buttonCloseList = document.querySelectorAll(".popup__close-button");
 
 // Profile
 const profileTitleName = document.querySelector(".profile__title-name");
@@ -26,7 +25,6 @@ const jobInput = formProfile.querySelector("#job-input");
 const formAddCard = popupAdd.querySelector(".form");
 const cardTitle = popupAdd.querySelector("#title-input");
 const pathImage = popupAdd.querySelector("#path-input");
-const closeButtonAddCard = popupAdd.querySelector(".form__close-button");
 const popupImageCaption = popupImage.querySelector(".popup__image-title");
 const popupImageFull = popupImage.querySelector(".popup__image");
 
@@ -38,10 +36,10 @@ const formValidProfile = new FormValidator(obj, formProfile);
 const formValidAddCard = new FormValidator(obj, formAddCard);
 
 // Функция закрытия popup по Escape
-const handlerKeyUp = (evt) => {
+const handleEscButton = (evt) => {
   if (evt.key === "Escape") {
-    const openPopup = document.querySelector(".popup_opened");
-    closePopup(openPopup);
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
   }
 };
 
@@ -49,11 +47,11 @@ const handlerKeyUp = (evt) => {
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
 
-  document.addEventListener("keyup", handlerKeyUp);
+  document.addEventListener("keyup", handleEscButton);
 };
 
 // Функция сохранения профиля
-const formSubmitHandlerProfile = (evt) => {
+const handleFormSubmitProfile = (evt) => {
   evt.preventDefault();
   profileTitleName.textContent = nameInput.value;
   profileProfession.textContent = jobInput.value;
@@ -63,7 +61,7 @@ const formSubmitHandlerProfile = (evt) => {
 // Функция закрытия popup
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
-  document.removeEventListener("keyup", handlerKeyUp);
+  document.removeEventListener("keyup", handleEscButton);
 };
 
 const handleImageClick = (title, path) => {
@@ -95,41 +93,32 @@ const formImageSubmitHandler = (evt) => {
 // Создание 6 начальных карточек
 cardsData.forEach(renderCard);
 
-popupCloseImage.addEventListener("click", () => closePopup(popupImage));
-
 // Слушатель формы для добавления карточки
 formAddCard.addEventListener("submit", formImageSubmitHandler);
 
 // Слушатель кнопки добавить изображение
 popupAddButton.addEventListener("click", () => {
   formAddCard.reset();
-  formValidAddCard.resetValidation(formAddCard);
-  const formSaveButton = popupAdd.querySelector(".form__save-button");
-  formSaveButton.classList.add("form__save-button_disabled");
-  formSaveButton.disabled = true;
+  formValidAddCard.resetValidation(true);
   openPopup(popupAdd);
-});
-
-closeButtonAddCard.addEventListener("click", () => {
-  closePopup(popupAdd);
 });
 
 // Слушатель кнопки редактирования профиля
 popupEditButton.addEventListener("click", () => {
-  formValidProfile.resetValidation(formProfile);
   nameInput.value = profileTitleName.textContent;
   jobInput.value = profileProfession.textContent;
-  const formSaveButton = popupEdit.querySelector(".form__save-button");
-  formSaveButton.classList.remove("form__save-button_disabled");
-  formSaveButton.disabled = false;
+  formValidProfile.resetValidation(false);
   openPopup(popupEdit);
 });
 
-// Слушатель кнопки закрытия popup
-popupCloseButtonEdit.addEventListener("click", () => closePopup(popupEdit));
-
 // Слушатель формы на отправку данных профиля
-formProfile.addEventListener("submit", formSubmitHandlerProfile);
+formProfile.addEventListener("submit", handleFormSubmitProfile);
+
+// Слушатели кнопки закрытия popup
+buttonCloseList.forEach((btn) => {
+  const popup = btn.closest(".popup");
+  btn.addEventListener("click", () => closePopup(popup));
+});
 
 // Закрытие popup кликом мыши
 popups.forEach((popup) => {
