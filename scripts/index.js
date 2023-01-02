@@ -71,10 +71,14 @@ const handleImageClick = (title, path) => {
   openPopup(popupImage);
 };
 
+const createCard = (data) => {
+  const card = new Card(data, "#card-template", handleImageClick);
+  return card.generateCard();
+};
+
 // Функция добавления карточки
 const renderCard = (data) => {
-  const card = new Card(data, "#card-template", handleImageClick);
-  gallery.prepend(card.generateCard());
+  gallery.prepend(createCard(data));
 };
 
 // Функция для отправки формы для карточки
