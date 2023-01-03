@@ -44,7 +44,7 @@ export default class FormValidator {
 
   // Функция, которая отключает и включает кнопку
   _toggleButtonState() {
-    if (this._hasInvalidInput(this._inputList)) {
+    if (this._hasInvalidInput()) {
       this._buttonElement.disabled = true;
       this._buttonElement.classList.add(this._inactiveButtonClass);
     } else {
@@ -60,7 +60,7 @@ export default class FormValidator {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(this._inputList, this._buttonElement);
+        this._toggleButtonState();
       });
     });
   }
@@ -70,17 +70,13 @@ export default class FormValidator {
     this._inputList.forEach((input) => {
       this._hideInputError(input);
     });
-    if (activeButton) {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
-      this._buttonElement.disabled = activeButton;
-    } else {
-      this._buttonElement.classList.remove(this._inactiveButtonClass);
-      this._buttonElement.disabled = activeButton;
-    }
-  }
 
-  // submitButtonSelector: ".form__save-button",
-  // inactiveButtonClass: "form__save-button_disabled",
+    this._buttonElement.classList.toggle(
+      this._inactiveButtonClass,
+      activeButton
+    );
+    this._buttonElement.disabled = activeButton;
+  }
 
   enableValidation() {
     this._setEventListeners();

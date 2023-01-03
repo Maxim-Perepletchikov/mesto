@@ -82,7 +82,7 @@ const renderCard = (data) => {
 };
 
 // Функция для отправки формы для карточки
-const formImageSubmitHandler = (evt) => {
+const handleFormSubmitImage = (evt) => {
   evt.preventDefault();
 
   const card = {
@@ -98,7 +98,7 @@ const formImageSubmitHandler = (evt) => {
 cardsData.forEach(renderCard);
 
 // Слушатель формы для добавления карточки
-formAddCard.addEventListener("submit", formImageSubmitHandler);
+formAddCard.addEventListener("submit", handleFormSubmitImage);
 
 // Слушатель кнопки добавить изображение
 popupAddButton.addEventListener("click", () => {

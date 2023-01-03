@@ -32,14 +32,13 @@ export default class Card {
     this._buttonDelete = this._card.querySelector(".card__delete-button");
     this._buttonLike = this._card.querySelector(".card__like");
     this._popupImage = document.querySelector(".popup__image");
-    this._popupImageTitle = document.querySelector(".popup__image-title");
 
     this._buttonDelete.addEventListener("click", () => {
       this._deleteCard();
     });
 
     this._cardImage.addEventListener("click", () => {
-      this._handleImageClick(this._title, this._path); // TODO
+      this._handleImageClick(this._title, this._path);
     });
 
     this._buttonLike.addEventListener("click", () => this._toggleLike());
@@ -53,12 +52,4 @@ export default class Card {
     this._card.remove();
     this._card = null;
   }
-
-  // _handleImageClick() {
-  //   this._popupImage.src = this._path;
-  //   this._popupImage.alt = this._title;
-  //   this._popupImageTitle.textContent = this._title;
-
-  //   // document.querySelector(".popup_type-image").classList.add("popup_opened");
-  // }
 }
