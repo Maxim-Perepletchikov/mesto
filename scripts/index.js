@@ -1,6 +1,7 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import { cardsData, obj } from "./data.js";
+import Section from "./Section.js";
 
 // Popups
 const popups = document.querySelectorAll(".popup");
@@ -29,7 +30,8 @@ const popupImageCaption = popupImage.querySelector(".popup__image-title");
 const popupImageFull = popupImage.querySelector(".popup__image");
 
 // Gallery
-const gallery = document.querySelector(".gallery");
+// const gallery = document.querySelector(".gallery");
+const cardListSelector = ".gallery";
 
 // Экземпляры класса FormValidator
 const formValidProfile = new FormValidator(obj, formProfile);
@@ -71,15 +73,30 @@ const handleImageClick = (title, path) => {
   openPopup(popupImage);
 };
 
-const createCard = (data) => {
-  const card = new Card(data, "#card-template", handleImageClick);
-  return card.generateCard();
-};
+// Экземпляр класса Section
+const cardList = new Section(
+  {
+    items: cardsData,
+    renderer: (item) => {
+      const card = new Card(item, "#card-template", handleImageClick);
+      cardList.addItem(card.generateCard());
+    },
+  },
+  cardListSelector
+);
 
-// Функция добавления карточки
-const renderCard = (data) => {
-  gallery.prepend(createCard(data));
-};
+// Отрисовка начальных карточек
+cardList.renderItems();
+
+// const createCard = (data) => {
+//   const card = new Card(data, "#card-template", handleImageClick);
+//   return card.generateCard();
+// };
+
+// // Функция добавления карточки
+// const renderCard = (data) => {
+//   gallery.prepend(createCard(data));
+// };
 
 // Функция для отправки формы для карточки
 const handleFormSubmitImage = (evt) => {
@@ -94,8 +111,8 @@ const handleFormSubmitImage = (evt) => {
   closePopup(popupAdd);
 };
 
-// Создание 6 начальных карточек
-cardsData.forEach(renderCard);
+// // Создание 6 начальных карточек
+// cardsData.forEach(renderCard);
 
 // Слушатель формы для добавления карточки
 formAddCard.addEventListener("submit", handleFormSubmitImage);
