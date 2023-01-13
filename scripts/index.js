@@ -2,6 +2,11 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import { cardsData, obj } from "./data.js";
 import Section from "./Section.js";
+import PopupWithImage from "./PopupWithImage.js";
+
+const pop = new PopupWithImage(".popup_type-image");
+
+pop.setEventListeners();
 
 // Popups
 const popups = document.querySelectorAll(".popup");
@@ -10,7 +15,7 @@ const popupAdd = document.querySelector(".popup_type-add");
 const popupImage = document.querySelector(".popup_type-image");
 
 // Кнопки закрытия popup
-const buttonCloseList = document.querySelectorAll(".popup__close-button");
+// const buttonCloseList = document.querySelectorAll(".popup__close-button");
 
 // Profile
 const profileTitleName = document.querySelector(".profile__title-name");
@@ -67,10 +72,11 @@ const closePopup = (popup) => {
 };
 
 const handleImageClick = (title, path) => {
-  popupImageFull.src = path;
-  popupImageFull.alt = title;
-  popupImageCaption.textContent = title;
-  openPopup(popupImage);
+  // popupImageFull.src = path;
+  // popupImageFull.alt = title;
+  // popupImageCaption.textContent = title;
+  // openPopup(popupImage);
+  pop.open(title, path);
 };
 
 // Экземпляр класса Section
@@ -136,19 +142,19 @@ popupEditButton.addEventListener("click", () => {
 formProfile.addEventListener("submit", handleFormSubmitProfile);
 
 // Слушатели кнопки закрытия popup
-buttonCloseList.forEach((btn) => {
-  const popup = btn.closest(".popup");
-  btn.addEventListener("click", () => closePopup(popup));
-});
+// buttonCloseList.forEach((btn) => {
+//   const popup = btn.closest(".popup");
+//   btn.addEventListener("click", () => closePopup(popup));
+// });
 
 // Закрытие popup кликом мыши
-popups.forEach((popup) => {
-  popup.addEventListener("click", (evt) => {
-    if (evt.target.classList.contains("popup")) {
-      closePopup(popup);
-    }
-  });
-});
+// popups.forEach((popup) => {
+//   popup.addEventListener("click", (evt) => {
+//     if (evt.target.classList.contains("popup")) {
+//       closePopup(popup);
+//     }
+//   });
+// });
 
 formValidProfile.enableValidation();
 formValidAddCard.enableValidation();
