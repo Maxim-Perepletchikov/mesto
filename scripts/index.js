@@ -3,10 +3,18 @@ import FormValidator from "./FormValidator.js";
 import { cardsData, obj } from "./data.js";
 import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
 
 const pop = new PopupWithImage(".popup_type-image");
+const popupAddCard = new PopupWithForm(
+  ".popup_type-add",
+  (handleSubmitForm) => {}
+);
+// const popupEditProf = new PopupWithForm(".popup_type-edit");
 
 pop.setEventListeners();
+popupAddCard.setEventListeners();
+popupEditProf.setEventListeners();
 
 // Popups
 const popups = document.querySelectorAll(".popup");
@@ -127,7 +135,8 @@ formAddCard.addEventListener("submit", handleFormSubmitImage);
 popupAddButton.addEventListener("click", () => {
   formAddCard.reset();
   formValidAddCard.resetValidation(true);
-  openPopup(popupAdd);
+  // openPopup(popupAdd);
+  popupAddCard.open();
 });
 
 // Слушатель кнопки редактирования профиля

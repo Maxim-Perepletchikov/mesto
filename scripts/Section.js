@@ -15,23 +15,3 @@ export default class Section {
     this._container.append(element);
   }
 }
-
-// // ./pages/index.js
-// const cardsList = new Section(
-//   {
-//     data: messageList,
-//     renderer: (messageItem) => {
-//       // Обратите внимание на параметр messageItem
-//       const message = messageItem.isOwner
-//         ? new UserMessage(messageItem, ".message-template_type_user")
-//         : new DefaultMessage(messageItem, ".message-template_type_default");
-
-//       const messageElement = message.generate();
-
-//       cardsList.setItem(cardElement);
-//     },
-//   },
-//   cardListSection
-// );
-
-// cardsList.renderItems();
