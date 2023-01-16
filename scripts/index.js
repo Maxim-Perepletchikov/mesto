@@ -6,15 +6,11 @@ import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 
 const pop = new PopupWithImage(".popup_type-image");
-const popupAddCard = new PopupWithForm(
-  ".popup_type-add",
-  (handleSubmitForm) => {}
-);
+
 // const popupEditProf = new PopupWithForm(".popup_type-edit");
 
 pop.setEventListeners();
-popupAddCard.setEventListeners();
-popupEditProf.setEventListeners();
+// popupEditProf.setEventListeners();
 
 // Popups
 const popups = document.querySelectorAll(".popup");
@@ -102,6 +98,28 @@ const cardList = new Section(
 // Отрисовка начальных карточек
 cardList.renderItems();
 
+const popupAddCard = new PopupWithForm({
+  popupSelector: ".popup_type-add",
+  handleSubmitForm: (handleSubmitForm) => {
+    const cardOne = new Section(
+      {
+        items: [],
+        renderer: () => {
+          const card = new Card(
+            handleSubmitForm,
+            "#card-template",
+            handleImageClick
+          );
+          cardOne.addItem(card.generateCard());
+        },
+      },
+      cardListSelector
+    );
+    cardOne.renderItems();
+  },
+});
+popupAddCard.setEventListeners();
+
 // const createCard = (data) => {
 //   const card = new Card(data, "#card-template", handleImageClick);
 //   return card.generateCard();
@@ -129,7 +147,7 @@ const handleFormSubmitImage = (evt) => {
 // cardsData.forEach(renderCard);
 
 // Слушатель формы для добавления карточки
-formAddCard.addEventListener("submit", handleFormSubmitImage);
+// formAddCard.addEventListener("submit", handleFormSubmitImage);
 
 // Слушатель кнопки добавить изображение
 popupAddButton.addEventListener("click", () => {
