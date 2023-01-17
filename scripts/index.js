@@ -4,6 +4,12 @@ import { cardsData, obj } from "./data.js";
 import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
+
+const userInfo = new UserInfo('.profile__title-name', '.profile__profession')
+console.log(userInfo.getUserInfo());
+userInfo.setUserInfo({userName: 'user-name', about: 'about me'})
+console.log(userInfo.getUserInfo());
 
 const pop = new PopupWithImage(".popup_type-image");
 
