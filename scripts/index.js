@@ -8,9 +8,9 @@ import PopupWithForm from "./PopupWithForm.js";
 const pop = new PopupWithImage(".popup_type-image");
 
 // const popupEditProf = new PopupWithForm(".popup_type-edit");
+// popupEditProf.setEventListeners();
 
 pop.setEventListeners();
-// popupEditProf.setEventListeners();
 
 // Popups
 const popups = document.querySelectorAll(".popup");
@@ -83,13 +83,17 @@ const handleImageClick = (title, path) => {
   pop.open(title, path);
 };
 
+const createCard = (data) => {
+  const card = new Card(data, "#card-template", handleImageClick);
+  return card.generateCard();
+};
+
 // Экземпляр класса Section
 const cardList = new Section(
   {
     items: cardsData,
     renderer: (item) => {
-      const card = new Card(item, "#card-template", handleImageClick);
-      cardList.addItem(card.generateCard());
+      cardList.addItem(createCard(item));
     },
   },
   cardListSelector
@@ -98,32 +102,16 @@ const cardList = new Section(
 // Отрисовка начальных карточек
 cardList.renderItems();
 
-const popupAddCard = new PopupWithForm({
-  popupSelector: ".popup_type-add",
-  handleSubmitForm: (handleSubmitForm) => {
-    const cardOne = new Section(
-      {
-        items: [],
-        renderer: () => {
-          const card = new Card(
-            handleSubmitForm,
-            "#card-template",
-            handleImageClick
-          );
-          cardOne.addItem(card.generateCard());
-        },
-      },
-      cardListSelector
-    );
-    cardOne.renderItems();
+const popupAddCard = new PopupWithForm(".popup_type-add", {
+  handleSubmitForm: ({title_input, path_input}) => {
+    const card = createCard({
+      cardName: title_input,
+      path: path_input
+    })
+    cardList.addItemPrep(card);
   },
 });
 popupAddCard.setEventListeners();
-
-// const createCard = (data) => {
-//   const card = new Card(data, "#card-template", handleImageClick);
-//   return card.generateCard();
-// };
 
 // // Функция добавления карточки
 // const renderCard = (data) => {
