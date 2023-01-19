@@ -6,7 +6,6 @@ import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import UserInfo from "./UserInfo.js";
 
-
 // Popups
 const popupEdit = document.querySelector(".popup_type-edit");
 const popupAdd = document.querySelector(".popup_type-add");
