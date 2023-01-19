@@ -6,13 +6,9 @@ import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import UserInfo from "./UserInfo.js";
 
-const userInfo = new UserInfo('.profile__title-name', '.profile__profession')
-console.log(userInfo.getUserInfo());
+const userInfo = new UserInfo({userName: '.profile__title-name', about: '.profile__profession'})
 
 const popupForImage = new PopupWithImage(".popup_type-image");
-
-
-
 
 popupForImage.setEventListeners();
 
@@ -119,6 +115,7 @@ const popupEditProf = new PopupWithForm(".popup_type-edit", {
       userName: name_input,
       about: job_input
     })
+
   }
 });
 popupEditProf.setEventListeners();
@@ -147,15 +144,16 @@ popupAddButton.addEventListener("click", () => {
 
 // Слушатель кнопки редактирования профиля
 popupEditButton.addEventListener("click", () => {
-  // nameInput.value = profileTitleName.textContent;
-  // jobInput.value = profileProfession.textContent;
+  const {userName, about} = userInfo.getUserInfo()
+  nameInput.value = userName
+  jobInput.value = about
   formValidProfile.resetValidation(false);
   // openPopup(popupEdit);
   popupEditProf.open()
 });
 
 // Слушатель формы на отправку данных профиля
-formProfile.addEventListener("submit", handleFormSubmitProfile);
+// formProfile.addEventListener("submit", handleFormSubmitProfile);
 
 formValidProfile.enableValidation();
 formValidAddCard.enableValidation();

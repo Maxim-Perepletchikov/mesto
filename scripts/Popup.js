@@ -13,6 +13,7 @@ export default class Popup {
   }
 
   setEventListeners() {
+    // this._closeButton.addEventListener("click", this.close.bind(this));
     this._closeButton.addEventListener("click", this.close.bind(this));
 
     document.addEventListener("keyup", this._handleEscClose.bind(this));
