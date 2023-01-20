@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
-    <script src="./scripts/index.js" type="module" defer></script>
     <title>Mesto</title>
   </head>
   <body class="root">
@@ -13,7 +11,7 @@
       <header class="header">
         <img
           class="header__logo"
-          src="./images/header-logo.svg"
+          src="<%=require('./images/header-logo.svg')%>"
           alt="логотип"
         />
       </header>
@@ -22,7 +20,7 @@
         <section class="profile">
           <img
             class="profile__avatar"
-            src="./images/profile__avatar.png"
+            src="<%=require('./images/profile__avatar.png')%>"
             alt="Аватар"
           />
           <div class="profile__profile-info">

@@ -5,15 +5,13 @@ import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import UserInfo from "./UserInfo.js";
+import '../pages/index.css'
 
 // Popups
 const popupEdit = document.querySelector(".popup_type-edit");
 const popupAdd = document.querySelector(".popup_type-add");
-const popupImage = document.querySelector(".popup_type-image");
 
 // Profile
-const profileTitleName = document.querySelector(".profile__title-name");
-const profileProfession = document.querySelector(".profile__profession");
 const popupEditButton = document.querySelector(".profile__edit");
 const popupAddButton = document.querySelector(".profile__add-button");
 
@@ -23,8 +21,6 @@ const nameInput = formProfile.querySelector("#name-input");
 const jobInput = formProfile.querySelector("#job-input");
 // Form add card
 const formAddCard = popupAdd.querySelector(".form");
-const cardTitle = popupAdd.querySelector("#title-input");
-const pathImage = popupAdd.querySelector("#path-input");
 
 // Gallery
 const cardListSelector = ".gallery";
