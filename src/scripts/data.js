@@ -25,7 +25,7 @@ export const cardsData = [
   },
 ];
 
-export const obj = {
+export const validationConfig = {
   inputSelector: ".form__input",
   submitButtonSelector: ".form__save-button",
   inactiveButtonClass: "form__save-button_disabled",

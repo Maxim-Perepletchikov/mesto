@@ -1,6 +1,6 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-import { cardsData, obj } from "./data.js";
+import { cardsData, validationConfig } from "./data.js";
 import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
@@ -26,13 +26,13 @@ const formAddCard = popupAdd.querySelector(".form");
 const cardListSelector = ".gallery";
 
 // Экземпляры класса FormValidator
-const formValidProfile = new FormValidator(obj, formProfile);
-const formValidAddCard = new FormValidator(obj, formAddCard);
+const formValidProfile = new FormValidator(validationConfig, formProfile);
+const formValidAddCard = new FormValidator(validationConfig, formAddCard);
 
 // Экземпляр класса для управления данныи профиля
 const userInfo = new UserInfo({
-  userName: ".profile__title-name",
-  about: ".profile__profession",
+  userNameSelector: ".profile__title-name",
+  aboutSelector: ".profile__profession",
 });
 
 // Создание карточки
@@ -47,37 +47,39 @@ const handleImageClick = (title, path) => {
 };
 
 // Экземпляр класса Section для вставки элементов
-const cardList = new Section(
+const cardsSection = new Section(
   {
     items: cardsData,
     renderer: (item) => {
-      cardList.addItem(createCard(item));
+      cardsSection.addItem(createCard(item));
     },
   },
   cardListSelector
 );
 // Отрисовка начальных карточек
-cardList.renderItems();
+cardsSection.renderItems();
 
 // Экземпляр класса для добавления новой карточки из формы
 const popupAddCard = new PopupWithForm(".popup_type-add", {
-  handleSubmitForm: ({ title_input, path_input }) => {
+  handleSubmitForm: ({ titleInput, pathInput }) => {
     const card = createCard({
-      cardName: title_input,
-      path: path_input,
+      cardName: titleInput,
+      path: pathInput,
     });
-    cardList.addItemPrep(card);
+    cardsSection.addItemPrep(card);
+    popupAddCard.close()
   },
 });
 popupAddCard.setEventListeners();
 
 // Экземпляр класса для редактирования профиля
 const popupEditProf = new PopupWithForm(".popup_type-edit", {
-  handleSubmitForm: ({ name_input, job_input }) => {
+  handleSubmitForm: ({ titleNameInput, aboutInput }) => {
     userInfo.setUserInfo({
-      userName: name_input,
-      about: job_input,
+      userName: titleNameInput,
+      about: aboutInput,
     });
+    popupEditProf.close()
   },
 });
 popupEditProf.setEventListeners();
