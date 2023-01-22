@@ -32,3 +32,21 @@ export const validationConfig = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "form__input-error",
 };
+
+// Popups
+export const popupEdit = document.querySelector(".popup_type-edit");
+export const popupAdd = document.querySelector(".popup_type-add");
+
+// Profile
+export const popupEditButton = document.querySelector(".profile__edit");
+export const popupAddButton = document.querySelector(".profile__add-button");
+
+// Form profile
+export const formProfile = popupEdit.querySelector(".form");
+export const nameInput = formProfile.querySelector("#name-input");
+export const jobInput = formProfile.querySelector("#job-input");
+// Form add card
+export const formAddCard = popupAdd.querySelector(".form");
+
+// Gallery
+export const cardListSelector = ".gallery";

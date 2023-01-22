@@ -55,7 +55,7 @@ export default class FormValidator {
 
   // Функция, которая добавит обработчики сразу всем полям формы
   _setEventListeners() {
-    this._toggleButtonState(this._inputList, this._buttonElement);
+    this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {

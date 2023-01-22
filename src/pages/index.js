@@ -1,29 +1,21 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
-import { cardsData, validationConfig } from "./data.js";
-import Section from "./Section.js";
-import PopupWithImage from "./PopupWithImage.js";
-import PopupWithForm from "./PopupWithForm.js";
-import UserInfo from "./UserInfo.js";
-import '../pages/index.css'
-
-// Popups
-const popupEdit = document.querySelector(".popup_type-edit");
-const popupAdd = document.querySelector(".popup_type-add");
-
-// Profile
-const popupEditButton = document.querySelector(".profile__edit");
-const popupAddButton = document.querySelector(".profile__add-button");
-
-// Form profile
-const formProfile = popupEdit.querySelector(".form");
-const nameInput = formProfile.querySelector("#name-input");
-const jobInput = formProfile.querySelector("#job-input");
-// Form add card
-const formAddCard = popupAdd.querySelector(".form");
-
-// Gallery
-const cardListSelector = ".gallery";
+import {
+  cardsData,
+  validationConfig,
+  popupEditButton,
+  popupAddButton,
+  formProfile,
+  nameInput,
+  jobInput,
+  formAddCard,
+  cardListSelector
+} from "../utils/constants.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import "./index.css";
 
 // Экземпляры класса FormValidator
 const formValidProfile = new FormValidator(validationConfig, formProfile);
@@ -67,7 +59,7 @@ const popupAddCard = new PopupWithForm(".popup_type-add", {
       path: pathInput,
     });
     cardsSection.addItemPrep(card);
-    popupAddCard.close()
+    popupAddCard.close();
   },
 });
 popupAddCard.setEventListeners();
@@ -79,7 +71,7 @@ const popupEditProf = new PopupWithForm(".popup_type-edit", {
       userName: titleNameInput,
       about: aboutInput,
     });
-    popupEditProf.close()
+    popupEditProf.close();
   },
 });
 popupEditProf.setEventListeners();
