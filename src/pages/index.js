@@ -98,3 +98,26 @@ popupEditButton.addEventListener("click", () => {
 // Включение валидации форм
 formValidProfile.enableValidation();
 formValidAddCard.enableValidation();
+
+
+// fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
+//   headers: {
+//     authorization: '30812f22-45b0-4eb1-a698-1f92d9f66ac5'
+//   }
+// })
+//   .then(res => res.json())
+//   .then((result) => {
+//     console.log(result);
+//   });
+
+// fetch('https://mesto.nomoreparties.co/v1/cohortId/users/me', {
+//   method: 'PATCH',
+//   headers: {
+//     authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({
+//     name: 'Marie Skłodowska Curie',
+//     about: 'Physicist and Chemist'
+//   })
+// });
