@@ -16,6 +16,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import "./index.css";
+import Api from "../components/Api.js";
 
 // Экземпляры класса FormValidator
 const formValidProfile = new FormValidator(validationConfig, formProfile);
@@ -38,25 +39,27 @@ const handleImageClick = (title, path) => {
   popupForImage.open(title, path);
 };
 
-// Экземпляр класса Section для вставки элементов
+const api = new Api()
+
 const cardsSection = new Section(
   {
-    items: cardsData,
+    // items: cardsData,
     renderer: (item) => {
       cardsSection.addItem(createCard(item));
     },
   },
   cardListSelector
 );
-// Отрисовка начальных карточек
-cardsSection.renderItems();
+
+api.getInitialCards().then(res => cardsSection.renderItems(res))
+
 
 // Экземпляр класса для добавления новой карточки из формы
 const popupAddCard = new PopupWithForm(".popup_type-add", {
   handleSubmitForm: ({ titleInput, pathInput }) => {
     const card = createCard({
-      cardName: titleInput,
-      path: pathInput,
+      name: titleInput,
+      link: pathInput,
     });
     cardsSection.addItemPrep(card);
     popupAddCard.close();
@@ -121,3 +124,16 @@ formValidAddCard.enableValidation();
 //     about: 'Physicist and Chemist'
 //   })
 // });
+
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me', {
+  headers: {
+    authorization: '30812f22-45b0-4eb1-a698-1f92d9f66ac5'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  });
+
+
