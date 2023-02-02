@@ -7,7 +7,7 @@ import {
   nameInput,
   jobInput,
   formAddCard,
-  cardListSelector
+  cardListSelector,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -28,6 +28,8 @@ const userInfo = new UserInfo({
   aboutSelector: ".profile__profession",
 });
 
+const api = new Api();
+
 // Создание карточки
 const createCard = (data) => {
   const card = new Card(data, "#card-template", handleImageClick);
@@ -39,11 +41,9 @@ const handleImageClick = (title, path) => {
   popupForImage.open(title, path);
 };
 
-const api = new Api()
-
+//
 const cardsSection = new Section(
   {
-    // items: cardsData,
     renderer: (item) => {
       cardsSection.addItem(createCard(item));
     },
@@ -51,18 +51,17 @@ const cardsSection = new Section(
   cardListSelector
 );
 
-api.getInitialCards().then(res => cardsSection.renderItems(res))
-
+api.getInitialCards().then((res) => cardsSection.renderItems(res));
+api.getInfoProfile().then((info) => userInfo.setUserInfo(info));
 
 // Экземпляр класса для добавления новой карточки из формы
 const popupAddCard = new PopupWithForm(".popup_type-add", {
   handleSubmitForm: ({ titleInput, pathInput }) => {
-    const card = createCard({
-      name: titleInput,
-      link: pathInput,
-    });
-    cardsSection.addItemPrep(card);
-    popupAddCard.close();
+    api.setCard({name: titleInput, link: pathInput}).then(cardInfo => {
+      const card = createCard(cardInfo);
+      cardsSection.addItemPrep(card);
+      popupAddCard.close();
+    }).catch(console.log)
   },
 });
 popupAddCard.setEventListeners();
@@ -70,11 +69,13 @@ popupAddCard.setEventListeners();
 // Экземпляр класса для редактирования профиля
 const popupEditProf = new PopupWithForm(".popup_type-edit", {
   handleSubmitForm: ({ titleNameInput, aboutInput }) => {
-    userInfo.setUserInfo({
-      userName: titleNameInput,
-      about: aboutInput,
-    });
-    popupEditProf.close();
+    api
+      .setInfoProfile({ name: titleNameInput, about: aboutInput })
+      .then((user) => {
+        userInfo.setUserInfo(user);
+        popupEditProf.close();
+      })
+      .catch(console.log);
   },
 });
 popupEditProf.setEventListeners();
@@ -102,31 +103,7 @@ popupEditButton.addEventListener("click", () => {
 formValidProfile.enableValidation();
 formValidAddCard.enableValidation();
 
-
-// fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
-//   headers: {
-//     authorization: '30812f22-45b0-4eb1-a698-1f92d9f66ac5'
-//   }
-// })
-//   .then(res => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   });
-
-// fetch('https://mesto.nomoreparties.co/v1/cohortId/users/me', {
-//   method: 'PATCH',
-//   headers: {
-//     authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
-//     'Content-Type': 'application/json'
-//   },
-//   body: JSON.stringify({
-//     name: 'Marie Skłodowska Curie',
-//     about: 'Physicist and Chemist'
-//   })
-// });
-
-
-fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me', {
+fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
   headers: {
     authorization: '30812f22-45b0-4eb1-a698-1f92d9f66ac5'
   }
@@ -136,4 +113,24 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me', {
     console.log(result);
   });
 
+// fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me', {
+//   method: 'PATCH',
+//   headers: {
+//     authorization: '30812f22-45b0-4eb1-a698-1f92d9f66ac5',
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({
+//     name: 'Marie Skłodowska Curie',
+//     about: 'Physicist and Chemist'
+//   })
+// });
 
+fetch("https://mesto.nomoreparties.co/v1/cohort-59/users/me", {
+  headers: {
+    authorization: "30812f22-45b0-4eb1-a698-1f92d9f66ac5",
+  },
+})
+  .then((res) => res.json())
+  .then((result) => {
+    console.log(result);
+  });

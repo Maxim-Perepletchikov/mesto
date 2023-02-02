@@ -1,4 +1,6 @@
 .card__title {
+  grid-row: 1 / 3;
+  align-self: center;
   color: black;
   margin: 0;
   text-overflow: ellipsis;
