@@ -32,7 +32,20 @@ const api = new Api();
 
 // Создание карточки
 const createCard = (data) => {
-  const card = new Card(data, "#card-template", handleImageClick);
+  const card = new Card(data, "#card-template", {
+    handleImageClick,
+    handleLikeClick: () => {
+      api
+        .setLike(data._id)
+        .then((res) =>
+          card.setCounterLikes(res.likes.length));
+    },
+    handleDeleteLikeClick: () => {
+      api.deleteLike(data._id)
+        .then(res =>
+          card.setCounterLikes(res.likes.length))
+    }
+  });
   return card.generateCard();
 };
 
@@ -51,17 +64,29 @@ const cardsSection = new Section(
   cardListSelector
 );
 
-api.getInitialCards().then((res) => cardsSection.renderItems(res));
-api.getInfoProfile().then((info) => userInfo.setUserInfo(info));
+Promise.all([api.getInfoProfile(), api.getInitialCards()]).then(
+  ([info, res]) => {
+    userInfo.setUserInfo(info);
+    cardsSection.renderItems(res);
+  }
+);
+// |
+// v
+
+// api.getInfoProfile().then((info) => userInfo.setUserInfo(info));
+// api.getInitialCards().then((res) => cardsSection.renderItems(res));
 
 // Экземпляр класса для добавления новой карточки из формы
 const popupAddCard = new PopupWithForm(".popup_type-add", {
   handleSubmitForm: ({ titleInput, pathInput }) => {
-    api.setCard({name: titleInput, link: pathInput}).then(cardInfo => {
-      const card = createCard(cardInfo);
-      cardsSection.addItemPrep(card);
-      popupAddCard.close();
-    }).catch(console.log)
+    api
+      .setCard({ name: titleInput, link: pathInput })
+      .then((cardInfo) => {
+        const card = createCard(cardInfo);
+        cardsSection.addItemPrep(card);
+        popupAddCard.close();
+      })
+      .catch(console.log);
   },
 });
 popupAddCard.setEventListeners();
@@ -102,35 +127,3 @@ popupEditButton.addEventListener("click", () => {
 // Включение валидации форм
 formValidProfile.enableValidation();
 formValidAddCard.enableValidation();
-
-fetch('https://mesto.nomoreparties.co/v1/cohort-59/cards', {
-  headers: {
-    authorization: '30812f22-45b0-4eb1-a698-1f92d9f66ac5'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  });
-
-// fetch('https://mesto.nomoreparties.co/v1/cohort-59/users/me', {
-//   method: 'PATCH',
-//   headers: {
-//     authorization: '30812f22-45b0-4eb1-a698-1f92d9f66ac5',
-//     'Content-Type': 'application/json'
-//   },
-//   body: JSON.stringify({
-//     name: 'Marie Skłodowska Curie',
-//     about: 'Physicist and Chemist'
-//   })
-// });
-
-fetch("https://mesto.nomoreparties.co/v1/cohort-59/users/me", {
-  headers: {
-    authorization: "30812f22-45b0-4eb1-a698-1f92d9f66ac5",
-  },
-})
-  .then((res) => res.json())
-  .then((result) => {
-    console.log(result);
-  });
