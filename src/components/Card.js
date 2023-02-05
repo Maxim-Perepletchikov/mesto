@@ -1,13 +1,15 @@
 export default class Card {
-  constructor(data, cardSelector, { handleImageClick, handleLikeClick, handleDeleteLikeClick }) {
+  constructor(data, cardSelector, { handleImageClick, handleLikeClick, handleDeleteLikeClick, handleDeleteCard }) {
     this._title = data.name;
     this._path = data.link;
     this._likes = data.likes;
-    this._owner = data.owner._id;
+    this.ownerId = data.owner._id;
+    this.owner = data.ownerId;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleLikeClick = handleLikeClick;
     this._handleDeleteLikeClick = handleDeleteLikeClick
+    this._handleDeleteCard = handleDeleteCard
   }
 
   _getTemplate() {
@@ -82,7 +84,7 @@ export default class Card {
 
   _checkLiked() {
     this._likes.forEach((like) => {
-      if (like._id === this._owner) this._addLikeIcon();
+      if (like._id === this.owner) this._addLikeIcon();
     });
   }
 

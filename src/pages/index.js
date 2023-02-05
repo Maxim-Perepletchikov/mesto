@@ -14,6 +14,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import UserInfo from "../components/UserInfo.js";
 import "./index.css";
 import Api from "../components/Api.js";
@@ -37,14 +38,16 @@ const createCard = (data) => {
     handleLikeClick: () => {
       api
         .setLike(data._id)
-        .then((res) =>
-          card.setCounterLikes(res.likes.length));
+        .then((res) => card.setCounterLikes(res.likes.length));
     },
     handleDeleteLikeClick: () => {
-      api.deleteLike(data._id)
-        .then(res =>
-          card.setCounterLikes(res.likes.length))
-    }
+      api
+        .deleteLike(data._id)
+        .then((res) => card.setCounterLikes(res.likes.length));
+    },
+    handleDeleteCard: () => {
+      popupDeleteCard.open()
+    },
   });
   return card.generateCard();
 };
@@ -54,7 +57,7 @@ const handleImageClick = (title, path) => {
   popupForImage.open(title, path);
 };
 
-//
+// Экземпляр класса для вставки элемента
 const cardsSection = new Section(
   {
     renderer: (item) => {
@@ -67,7 +70,7 @@ const cardsSection = new Section(
 Promise.all([api.getInfoProfile(), api.getInitialCards()]).then(
   ([info, res]) => {
     userInfo.setUserInfo(info);
-    cardsSection.renderItems(res);
+    cardsSection.renderItems(res, userInfo);
   }
 );
 // |
@@ -108,6 +111,14 @@ popupEditProf.setEventListeners();
 // Экземпляр класса для открытия попапа с картинкой
 const popupForImage = new PopupWithImage(".popup_type-image");
 popupForImage.setEventListeners();
+
+// Экземпляр класса для подтверждения удаления карточки
+const popupDeleteCard = new PopupWithConfirmation(".popup_delete-card", {
+  handleSubmitForm: () => {
+    console.log(hi);
+  },
+});
+popupDeleteCard.setEventListeners();
 
 // Слушатель кнопки добавить карточку
 popupAddButton.addEventListener("click", () => {
