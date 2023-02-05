@@ -45,7 +45,7 @@ const createCard = (data) => {
         .deleteLike(data._id)
         .then((res) => card.setCounterLikes(res.likes.length));
     },
-    handleDeleteCard: () => {
+    handleDeleteCard: (card) => {
       popupDeleteCard.open()
     },
   });
@@ -115,7 +115,7 @@ popupForImage.setEventListeners();
 // Экземпляр класса для подтверждения удаления карточки
 const popupDeleteCard = new PopupWithConfirmation(".popup_delete-card", {
   handleSubmitForm: () => {
-    console.log(hi);
+    api.deleteCard(id).then(console.log)
   },
 });
 popupDeleteCard.setEventListeners();
