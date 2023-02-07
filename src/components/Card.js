@@ -86,13 +86,20 @@ export default class Card {
   _checkLiked() {
     this._likes.forEach((like) => {
       if (like._id === this.owner) this._addLikeIcon();
+      console.log(this.owner);
     });
   }
 
   _checkDeleteCard() {
     if (this.ownerId !== this.owner) {
+      console.log(this.ownerId);
+      console.log(this.owner);
       this._buttonDelete.remove()
     }
+  }
+
+  deleteCard() {
+    this._card.remove()
   }
 
   // _handleDeleteCard() {

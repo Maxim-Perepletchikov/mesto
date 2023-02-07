@@ -46,7 +46,13 @@ const createCard = (data) => {
         .then((res) => card.setCounterLikes(res.likes.length));
     },
     handleDeleteCard: (card) => {
-      popupDeleteCard.open()
+      popupDeleteCard.submit(() => {
+        api.deleteCard(data._id).then(() => {
+          card.deleteCard();
+          popupDeleteCard.close()
+        });
+      });
+      popupDeleteCard.open();
     },
   });
   return card.generateCard();
@@ -113,11 +119,7 @@ const popupForImage = new PopupWithImage(".popup_type-image");
 popupForImage.setEventListeners();
 
 // Экземпляр класса для подтверждения удаления карточки
-const popupDeleteCard = new PopupWithConfirmation(".popup_delete-card", {
-  handleSubmitForm: () => {
-    api.deleteCard(id).then(console.log)
-  },
-});
+const popupDeleteCard = new PopupWithConfirmation(".popup_delete-card");
 popupDeleteCard.setEventListeners();
 
 // Слушатель кнопки добавить карточку
