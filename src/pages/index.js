@@ -45,14 +45,14 @@ const createCard = (data) => {
         .deleteLike(data._id)
         .then((res) => card.setCounterLikes(res.likes.length));
     },
-    handleDeleteCard: (card) => {
+    handleDeleteCard: () => {
+      popupDeleteCard.open();
       popupDeleteCard.submit(() => {
         api.deleteCard(data._id).then(() => {
           card.deleteCard();
-          popupDeleteCard.close()
+          popupDeleteCard.close();
         });
       });
-      popupDeleteCard.open();
     },
   });
   return card.generateCard();
