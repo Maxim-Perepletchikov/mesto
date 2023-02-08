@@ -125,4 +125,26 @@ export default class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
+
+  setAvatar({ avatar }) {
+    return fetch(
+      "https://mesto.nomoreparties.co/v1/cohort-59/users/me/avatar",
+      {
+        method: "PATCH",
+        headers: {
+          authorization: "30812f22-45b0-4eb1-a698-1f92d9f66ac5",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          avatar,
+        }),
+      }
+    ).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
 }

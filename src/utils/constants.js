@@ -39,10 +39,12 @@ export const popupAdd = document.querySelector(".popup_type-add");
 
 // Profile
 export const popupEditButton = document.querySelector(".profile__edit");
+export const popupAvatarProfile = document.querySelector('.profile__avatar')
 export const popupAddButton = document.querySelector(".profile__add-button");
 
 // Form profile
 export const formProfile = popupEdit.querySelector(".form");
+export const formAvatar = popupAvatarProfile.querySelector('.form')
 export const nameInput = formProfile.querySelector("#name-input");
 export const jobInput = formProfile.querySelector("#job-input");
 // Form add card

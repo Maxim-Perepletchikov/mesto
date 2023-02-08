@@ -4,10 +4,12 @@ import {
   popupEditButton,
   popupAddButton,
   formProfile,
+  formAvatar,
   nameInput,
   jobInput,
   formAddCard,
   cardListSelector,
+  popupAvatarProfile
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -22,6 +24,7 @@ import Api from "../components/Api.js";
 // Экземпляры класса FormValidator
 const formValidProfile = new FormValidator(validationConfig, formProfile);
 const formValidAddCard = new FormValidator(validationConfig, formAddCard);
+// const formValidAvatar = new FormValidator(validationConfig, formAvatar)
 
 // Экземпляр класса для управления данныи профиля
 const userInfo = new UserInfo({
@@ -114,6 +117,12 @@ const popupEditProf = new PopupWithForm(".popup_type-edit", {
 });
 popupEditProf.setEventListeners();
 
+const popupAvatar = new PopupWithForm('.popup_type-avatar', {
+  handleSubmitForm: ({pathAvatar}) => {
+    api.setAvatar({avatar: pathAvatar})
+  }
+})
+
 // Экземпляр класса для открытия попапа с картинкой
 const popupForImage = new PopupWithImage(".popup_type-image");
 popupForImage.setEventListeners();
@@ -136,6 +145,8 @@ popupEditButton.addEventListener("click", () => {
   formValidProfile.resetValidation(false);
   popupEditProf.open();
 });
+
+popupAvatarProfile.addEventListener('click', )
 
 // Включение валидации форм
 formValidProfile.enableValidation();
