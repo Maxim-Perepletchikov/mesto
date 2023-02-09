@@ -24,7 +24,7 @@ import Api from "../components/Api.js";
 // Экземпляры класса FormValidator
 const formValidProfile = new FormValidator(validationConfig, formProfile);
 const formValidAddCard = new FormValidator(validationConfig, formAddCard);
-// const formValidAvatar = new FormValidator(validationConfig, formAvatar)
+const formValidAvatar = new FormValidator(validationConfig, formAvatar)
 
 // Экземпляр класса для управления данныи профиля
 const userInfo = new UserInfo({
@@ -82,8 +82,6 @@ Promise.all([api.getInfoProfile(), api.getInitialCards()]).then(
     cardsSection.renderItems(res, userInfo);
   }
 );
-// |
-// v
 
 // api.getInfoProfile().then((info) => userInfo.setUserInfo(info));
 // api.getInitialCards().then((res) => cardsSection.renderItems(res));
@@ -117,11 +115,17 @@ const popupEditProf = new PopupWithForm(".popup_type-edit", {
 });
 popupEditProf.setEventListeners();
 
+// Экземпляр класса для редактирования аватарки
 const popupAvatar = new PopupWithForm('.popup_type-avatar', {
   handleSubmitForm: ({pathAvatar}) => {
-    api.setAvatar({avatar: pathAvatar})
+    api.setAvatar({avatar: pathAvatar}).then(user => {
+      userInfo.setUserInfo(user)
+      popupAvatar.close()
+    })
+    .catch(console.log);
   }
 })
+popupAvatar.setEventListeners();
 
 // Экземпляр класса для открытия попапа с картинкой
 const popupForImage = new PopupWithImage(".popup_type-image");
@@ -130,6 +134,12 @@ popupForImage.setEventListeners();
 // Экземпляр класса для подтверждения удаления карточки
 const popupDeleteCard = new PopupWithConfirmation(".popup_delete-card");
 popupDeleteCard.setEventListeners();
+
+// Слушатель кнопки сменить аватарку
+popupAvatarProfile.addEventListener('click', () => {
+  formValidAvatar.resetValidation(true);
+  popupAvatar.open()
+})
 
 // Слушатель кнопки добавить карточку
 popupAddButton.addEventListener("click", () => {
@@ -146,8 +156,8 @@ popupEditButton.addEventListener("click", () => {
   popupEditProf.open();
 });
 
-popupAvatarProfile.addEventListener('click', )
-
 // Включение валидации форм
 formValidProfile.enableValidation();
 formValidAddCard.enableValidation();
+formValidAvatar.enableValidation()
+

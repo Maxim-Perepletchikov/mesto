@@ -5,6 +5,6 @@
   margin-top: 30px;
 }
 
-.form__error-container:last-of-type {
+.form__error-container:nth-child(odd) {
   margin: 0;
 }
