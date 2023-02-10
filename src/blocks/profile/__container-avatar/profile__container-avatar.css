@@ -7,7 +7,7 @@
   /* z-index: 1; */
 }
 
-.profile__container-avatar::before {
+/* .profile__container-avatar::before {
   content: "";
   background: #000;
   opacity: 0;
@@ -22,4 +22,4 @@
 
 .profile__container-avatar:hover::before {
   opacity: 0;
-}
+} */

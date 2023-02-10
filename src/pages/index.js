@@ -9,7 +9,8 @@ import {
   jobInput,
   formAddCard,
   cardListSelector,
-  popupAvatarProfile
+  popupAvatarProfile,
+  optionsApi
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -18,8 +19,8 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import UserInfo from "../components/UserInfo.js";
-import "./index.css";
 import Api from "../components/Api.js";
+import "./index.css";
 
 // Экземпляры класса FormValidator
 const formValidProfile = new FormValidator(validationConfig, formProfile);
@@ -32,7 +33,7 @@ const userInfo = new UserInfo({
   aboutSelector: ".profile__profession",
 });
 
-const api = new Api();
+const api = new Api(optionsApi);
 
 // Создание карточки
 const createCard = (data) => {
