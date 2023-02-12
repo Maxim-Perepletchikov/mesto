@@ -1,5 +1,4 @@
 import {
-  cardsData,
   validationConfig,
   popupEditButton,
   popupAddButton,
@@ -10,7 +9,7 @@ import {
   formAddCard,
   cardListSelector,
   popupAvatarProfile,
-  optionsApi
+  options,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -25,7 +24,7 @@ import "./index.css";
 // Экземпляры класса FormValidator
 const formValidProfile = new FormValidator(validationConfig, formProfile);
 const formValidAddCard = new FormValidator(validationConfig, formAddCard);
-const formValidAvatar = new FormValidator(validationConfig, formAvatar)
+const formValidAvatar = new FormValidator(validationConfig, formAvatar);
 
 // Экземпляр класса для управления данныи профиля
 const userInfo = new UserInfo({
@@ -33,7 +32,7 @@ const userInfo = new UserInfo({
   aboutSelector: ".profile__profession",
 });
 
-const api = new Api(optionsApi);
+const api = new Api(options);
 
 // Создание карточки
 const createCard = (data) => {
@@ -90,6 +89,7 @@ Promise.all([api.getInfoProfile(), api.getInitialCards()]).then(
 // Экземпляр класса для добавления новой карточки из формы
 const popupAddCard = new PopupWithForm(".popup_type-add", {
   handleSubmitForm: ({ titleInput, pathInput }) => {
+    popupAddCard.renderLoading(true);
     api
       .setCard({ name: titleInput, link: pathInput })
       .then((cardInfo) => {
@@ -97,7 +97,8 @@ const popupAddCard = new PopupWithForm(".popup_type-add", {
         cardsSection.addItemPrep(card);
         popupAddCard.close();
       })
-      .catch(console.log);
+      .catch(console.log)
+      .finally(() => popupAddCard.renderLoading(false));
   },
 });
 popupAddCard.setEventListeners();
@@ -105,27 +106,33 @@ popupAddCard.setEventListeners();
 // Экземпляр класса для редактирования профиля
 const popupEditProf = new PopupWithForm(".popup_type-edit", {
   handleSubmitForm: ({ titleNameInput, aboutInput }) => {
+    popupEditProf.renderLoading(true)
     api
       .setInfoProfile({ name: titleNameInput, about: aboutInput })
       .then((user) => {
         userInfo.setUserInfo(user);
         popupEditProf.close();
       })
-      .catch(console.log);
+      .catch(console.log)
+      .finally(() => popupEditProf.renderLoading(false))
   },
 });
 popupEditProf.setEventListeners();
 
 // Экземпляр класса для редактирования аватарки
-const popupAvatar = new PopupWithForm('.popup_type-avatar', {
-  handleSubmitForm: ({pathAvatar}) => {
-    api.setAvatar({avatar: pathAvatar}).then(user => {
-      userInfo.setUserInfo(user)
-      popupAvatar.close()
-    })
-    .catch(console.log);
-  }
-})
+const popupAvatar = new PopupWithForm(".popup_type-avatar", {
+  handleSubmitForm: ({ pathAvatar }) => {
+    popupAvatar.renderLoading(true)
+    api
+      .setAvatar({ avatar: pathAvatar })
+      .then((user) => {
+        userInfo.setUserInfo(user);
+        popupAvatar.close();
+      })
+      .catch(console.log)
+      .finally(() => popupAvatar.renderLoading(false))
+  },
+});
 popupAvatar.setEventListeners();
 
 // Экземпляр класса для открытия попапа с картинкой
@@ -137,10 +144,10 @@ const popupDeleteCard = new PopupWithConfirmation(".popup_delete-card");
 popupDeleteCard.setEventListeners();
 
 // Слушатель кнопки сменить аватарку
-popupAvatarProfile.addEventListener('click', () => {
+popupAvatarProfile.addEventListener("click", () => {
   formValidAvatar.resetValidation(true);
-  popupAvatar.open()
-})
+  popupAvatar.open();
+});
 
 // Слушатель кнопки добавить карточку
 popupAddButton.addEventListener("click", () => {
@@ -160,5 +167,4 @@ popupEditButton.addEventListener("click", () => {
 // Включение валидации форм
 formValidProfile.enableValidation();
 formValidAddCard.enableValidation();
-formValidAvatar.enableValidation()
-
+formValidAvatar.enableValidation();

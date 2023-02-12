@@ -1,4 +1,4 @@
-export const optionsApi = {
+export const options = {
   url: "https://mesto.nomoreparties.co/v1/cohort-59",
   headers: {
     authorization: "30812f22-45b0-4eb1-a698-1f92d9f66ac5",
