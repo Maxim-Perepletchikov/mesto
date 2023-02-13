@@ -93,7 +93,7 @@ const popupAddCard = new PopupWithForm(".popup_type-add", {
     api
       .setCard({ name: titleInput, link: pathInput })
       .then((cardInfo) => {
-        const card = createCard(cardInfo);
+        const card = createCard({...cardInfo, owner: userInfo.id});
         cardsSection.addItemPrep(card);
         popupAddCard.close();
       })
