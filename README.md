@@ -19,7 +19,7 @@
 **Картинки**
 
 <p>
-  <img src="./images/1280.jpg" width="352">
-  <img src="./images/700.jpg" width="300">
-  <img src="./images/400.jpg" width="300">
+  <img src="./src/images/1280.jpg" width="352">
+  <img src="./src/images/700.jpg" width="300">
+  <img src="./src/images/400.jpg" width="300">
 </p>
