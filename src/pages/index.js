@@ -87,7 +87,7 @@ Promise.all([api.getInfoProfile(), api.getInitialCards()]).then(
     userInfo.setUserInfo(info);
     cardsSection.renderItems(res, userInfo);
   }
-);
+).catch(console.log);
 
 // Экземпляр класса для добавления новой карточки из формы
 const popupAddCard = new PopupWithForm(".popup_type-add", {
