@@ -25,6 +25,9 @@ export default class Card {
     this._card = this._getTemplate();
     this._cardImage = this._card.querySelector(".card__image");
     this._cardTitle = this._card.querySelector(".card__title");
+    this._buttonDelete = this._card.querySelector(".card__delete-button");
+    this._buttonLike = this._card.querySelector(".card__like");
+    this._counterLikes = this._card.querySelector(".card__counter-likes")
     this._setEventListeners();
     this.setCounterLikes(this._likes.length);
     this._checkLiked();
@@ -38,9 +41,6 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._buttonDelete = this._card.querySelector(".card__delete-button");
-    this._buttonLike = this._card.querySelector(".card__like");
-
     this._buttonDelete.addEventListener("click", () => {
       this._handleDeleteCard(this);
     });
@@ -52,7 +52,7 @@ export default class Card {
     this._buttonLike.addEventListener(
       "click",
       () => {
-        if (this._card.querySelector('.card__like').classList.contains('card__like_active')) {
+        if (this._buttonLike.classList.contains('card__like_active')) {
           this._deleteLike();
         } else {
           this._like();
@@ -80,19 +80,17 @@ export default class Card {
   }
 
   setCounterLikes(count) {
-    this._card.querySelector(".card__counter-likes").textContent = count;
+    this._counterLikes.textContent = count;
   }
 
   _checkLiked() {
     this._likes.forEach((like) => {
       if (like._id === this.owner) this._addLikeIcon();
-      // console.log(this.owner);
     });
   }
 
   _checkDeleteCard() {
     if (this.ownerId !== this.owner) {
-      // console.log(this.owner); ???
       this._buttonDelete.remove()
     }
   }

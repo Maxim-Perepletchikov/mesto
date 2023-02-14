@@ -30,6 +30,7 @@ const formValidAvatar = new FormValidator(validationConfig, formAvatar);
 const userInfo = new UserInfo({
   userNameSelector: ".profile__title-name",
   aboutSelector: ".profile__profession",
+  avatarSelector: ".profile__avatar",
 });
 
 const api = new Api(options);
@@ -41,20 +42,25 @@ const createCard = (data) => {
     handleLikeClick: () => {
       api
         .setLike(data._id)
-        .then((res) => card.setCounterLikes(res.likes.length));
+        .then((res) => card.setCounterLikes(res.likes.length))
+        .catch(console.log);
     },
     handleDeleteLikeClick: () => {
       api
         .deleteLike(data._id)
-        .then((res) => card.setCounterLikes(res.likes.length));
+        .then((res) => card.setCounterLikes(res.likes.length))
+        .catch(console.log);
     },
     handleDeleteCard: () => {
       popupDeleteCard.open();
       popupDeleteCard.submit(() => {
-        api.deleteCard(data._id).then(() => {
-          card.deleteCard();
-          popupDeleteCard.close();
-        });
+        api
+          .deleteCard(data._id)
+          .then(() => {
+            card.deleteCard();
+            popupDeleteCard.close();
+          })
+          .catch(console.log);
       });
     },
   });
@@ -83,9 +89,6 @@ Promise.all([api.getInfoProfile(), api.getInitialCards()]).then(
   }
 );
 
-// api.getInfoProfile().then((info) => userInfo.setUserInfo(info));
-// api.getInitialCards().then((res) => cardsSection.renderItems(res));
-
 // Экземпляр класса для добавления новой карточки из формы
 const popupAddCard = new PopupWithForm(".popup_type-add", {
   handleSubmitForm: ({ titleInput, pathInput }) => {
@@ -93,7 +96,7 @@ const popupAddCard = new PopupWithForm(".popup_type-add", {
     api
       .setCard({ name: titleInput, link: pathInput })
       .then((cardInfo) => {
-        const card = createCard({...cardInfo, owner: userInfo.id});
+        const card = createCard({ ...cardInfo, owner: userInfo.id });
         cardsSection.addItemPrep(card);
         popupAddCard.close();
       })
@@ -106,7 +109,7 @@ popupAddCard.setEventListeners();
 // Экземпляр класса для редактирования профиля
 const popupEditProf = new PopupWithForm(".popup_type-edit", {
   handleSubmitForm: ({ titleNameInput, aboutInput }) => {
-    popupEditProf.renderLoading(true)
+    popupEditProf.renderLoading(true);
     api
       .setInfoProfile({ name: titleNameInput, about: aboutInput })
       .then((user) => {
@@ -114,7 +117,7 @@ const popupEditProf = new PopupWithForm(".popup_type-edit", {
         popupEditProf.close();
       })
       .catch(console.log)
-      .finally(() => popupEditProf.renderLoading(false))
+      .finally(() => popupEditProf.renderLoading(false));
   },
 });
 popupEditProf.setEventListeners();
@@ -122,7 +125,7 @@ popupEditProf.setEventListeners();
 // Экземпляр класса для редактирования аватарки
 const popupAvatar = new PopupWithForm(".popup_type-avatar", {
   handleSubmitForm: ({ pathAvatar }) => {
-    popupAvatar.renderLoading(true)
+    popupAvatar.renderLoading(true);
     api
       .setAvatar({ avatar: pathAvatar })
       .then((user) => {
@@ -130,7 +133,7 @@ const popupAvatar = new PopupWithForm(".popup_type-avatar", {
         popupAvatar.close();
       })
       .catch(console.log)
-      .finally(() => popupAvatar.renderLoading(false))
+      .finally(() => popupAvatar.renderLoading(false));
   },
 });
 popupAvatar.setEventListeners();
