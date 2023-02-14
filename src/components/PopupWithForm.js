@@ -10,6 +10,12 @@ export default class PopupWithForm extends Popup {
     this._initialValueSaveButton = this._saveButton.textContent;
   }
 
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      input.value = data[input.name];
+    });
+  }
+
   _getInputValues() {
     this._formValues = {};
 

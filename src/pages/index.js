@@ -2,14 +2,10 @@ import {
   validationConfig,
   popupEditButton,
   popupAddButton,
-  formProfile,
-  formAvatar,
-  nameInput,
-  jobInput,
-  formAddCard,
   cardListSelector,
   popupAvatarProfile,
   options,
+  formValidators
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -21,10 +17,20 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import "./index.css";
 
-// Экземпляры класса FormValidator
-const formValidProfile = new FormValidator(validationConfig, formProfile);
-const formValidAddCard = new FormValidator(validationConfig, formAddCard);
-const formValidAvatar = new FormValidator(validationConfig, formAvatar);
+const enableValidation = config => {
+  const formList = [...document.querySelectorAll(config.formSelector)]
+  formList.forEach(formElement => {
+    const validator = new FormValidator(config, formElement)
+
+    const formName = formElement.getAttribute('name')
+
+    formValidators[formName] = validator
+
+    validator.enableValidation()
+  })
+}
+
+enableValidation(validationConfig)
 
 // Экземпляр класса для управления данныи профиля
 const userInfo = new UserInfo({
@@ -148,26 +154,19 @@ popupDeleteCard.setEventListeners();
 
 // Слушатель кнопки сменить аватарку
 popupAvatarProfile.addEventListener("click", () => {
-  formValidAvatar.resetValidation(true);
+  formValidators['formAvatar'].resetValidation(true)
   popupAvatar.open();
 });
 
 // Слушатель кнопки добавить карточку
 popupAddButton.addEventListener("click", () => {
-  formValidAddCard.resetValidation(true);
+  formValidators['formAdd'].resetValidation(true)
   popupAddCard.open();
 });
 
 // Слушатель кнопки редактирования профиля
 popupEditButton.addEventListener("click", () => {
-  const { userName, about } = userInfo.getUserInfo();
-  nameInput.value = userName;
-  jobInput.value = about;
-  formValidProfile.resetValidation(false);
+  popupEditProf.setInputValues(userInfo.getUserInfo())
+  formValidators['formEdit'].resetValidation(false)
   popupEditProf.open();
 });
-
-// Включение валидации форм
-formValidProfile.enableValidation();
-formValidAddCard.enableValidation();
-formValidAvatar.enableValidation();
